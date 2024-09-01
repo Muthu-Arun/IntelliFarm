@@ -40,7 +40,11 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+<<<<<<< HEAD
     background: url('./../images/image3.jpg') no-repeat;
+=======
+    background: url('/static/images/image3.jpg') no-repeat;
+>>>>>>> ebd1763e621e1a3df165448b0af596bfa4349525
     background-size: cover;
     background-position: center;
     height: 3600px;

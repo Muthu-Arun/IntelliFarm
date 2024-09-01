@@ -1,38 +1,55 @@
 #include<iostream>
 #include<crow_all.h>
 #include<fstream>
+// #define CROW_STATIC_DIRECTORY "./src/static" 
 crow::mustache::rendered_template render_page();
 int main()
 {
     crow::SimpleApp app; //define your crow application
     //define your endpoint at the root directory
     CROW_ROUTE(app, "/")(render_page);
-    
-    //set the port, set the app to run on multiple threads, and run the app
-      app.route_dynamic("/static/<string>")
-        .methods("GET"_method)
-        ([](const crow::request&, crow::response& res, std::string filename){
-            std::string file_path = "./static/css/styles.css"; // Adjust the path as needed
-            std::ifstream in(file_path, std::ifstream::in);
+    CROW_ROUTE(app, "/static/css/styles.css")([](){
+        std::ifstream file("./src//static/css/styles.css",std::ios::binary);
+        if (!file.is_open()) {
+            std::cout<<"FIle not opened\n";
+            return crow::response(404);
+            
+        }
 
-            if (!in) {
-                res.code = 404;
-                res.end("File not found");
-                return;
-            }
+        std::stringstream buffer;
+        buffer << file.rdbuf();
+        crow::response res(buffer.str());
 
-            std::ostringstream contents;
-            contents << in.rdbuf();
-            res.write(contents.str());
-        
-                res.add_header("Content-Type", "text/css");
+        // Set the appropriate content type based on the file extension
 
-            // Add more content types if necessary
+        //  if (filename.find(".css") != std::string::npos) {
+            res.set_header("Content-Type", "text/css");
+        //  }
 
-            res.end();
-        });
+        return res;
+    });
+        CROW_ROUTE(app, "/static/images/image2.jpg")([](){
+        std::ifstream file("./src/static/images/image2.jpg",std::ios::binary);
+        if (!file.is_open()) {
+            std::cout<<"FIle not opened\n";
+            return crow::response(404);
+            
+        }
 
-    app.port(18080).multithreaded().run();
+        std::stringstream buffer;
+        buffer << file.rdbuf();
+        crow::response res(buffer.str());
+
+        // Set the appropriate content type based on the file extension
+
+        //  if (filename.find(".css") != std::string::npos) {
+        res.set_header("Content-Type", "image/jpeg");
+
+        //  }
+
+        return res;
+    });
+    app.bindaddr("172.18.162.174").port(8080).multithreaded().run();
 }
   
 crow::mustache::rendered_template render_page(){
