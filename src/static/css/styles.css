@@ -12,7 +12,7 @@ header {
     left: 0px;
     width: 100%;
     padding: 20px 100px;
-    background-color: #a3a3a3;
+    background-color: #d1e8e2;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,8 +20,19 @@ header {
 }
 
 .h2 {
-    color: #1A3636;
+    color: #116466;
     font-weight: bold;
+    font-size: 2em;
+    user-select: none;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500px;
+    margin-left: 40px;
 }
 
 body {
@@ -29,7 +40,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('./../images/image2.jpg') no-repeat;
+    background: url('./../images/image3.jpg') no-repeat;
     background-size: cover;
     background-position: center;
     height: 3600px;
