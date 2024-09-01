@@ -9,7 +9,7 @@ int main()
     //define your endpoint at the root directory
     CROW_ROUTE(app, "/")(render_page);
     CROW_ROUTE(app, "/static/css/styles.css")([](){
-        std::ifstream file("./src//static/css/styles.css",std::ios::binary);
+        std::ifstream file("./src/static/css/styles.css",std::ios::binary);
         if (!file.is_open()) {
             std::cout<<"FIle not opened\n";
             return crow::response(404);
@@ -28,8 +28,8 @@ int main()
 
         return res;
     });
-        CROW_ROUTE(app, "/static/images/image2.jpg")([](){
-        std::ifstream file("./src/static/images/image2.jpg",std::ios::binary);
+        CROW_ROUTE(app, "/static/images/image3.jpg")([](){
+        std::ifstream file("./src/static/images/image3.jpg",std::ios::binary);
         if (!file.is_open()) {
             std::cout<<"FIle not opened\n";
             return crow::response(404);
