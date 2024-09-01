@@ -10,7 +10,7 @@ int main()
     //set the port, set the app to run on multiple threads, and run the app
     app.port(18080).multithreaded().run();
 }
-
+  
 crow::mustache::rendered_template render_page(){
         crow::mustache::set_base("./src/templates");
         // Load the template from a file (or define it directly as a string)
