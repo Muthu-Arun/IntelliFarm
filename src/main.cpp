@@ -39,6 +39,7 @@ int main()
         std::stringstream buffer;
         buffer << file.rdbuf();
         crow::response res(buffer.str());
+        res.set_header("Cache-Control", "public, max-age=86400"); // Cache for 1 day
 
         // Set the appropriate content type based on the file extension
 
