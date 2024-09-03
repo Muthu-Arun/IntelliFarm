@@ -1,10 +1,13 @@
 #include<iostream>
 #include<crow_all.h>
 #include<fstream>
+
 // #define CROW_STATIC_DIRECTORY "./src/static" 
 crow::mustache::rendered_template render_page();
 int main()
 {
+    // std::string css_cache;
+    // std::stringstream css_buffer;
     crow::SimpleApp app; //define your crow application
     //define your endpoint at the root directory
     CROW_ROUTE(app, "/")(render_page);
@@ -39,15 +42,12 @@ int main()
         std::stringstream buffer;
         buffer << file.rdbuf();
         crow::response res(buffer.str());
+
         res.set_header("Cache-Control", "public, max-age=86400"); // Cache for 1 day
 
         // Set the appropriate content type based on the file extension
 
-        //  if (filename.find(".css") != std::string::npos) {
         res.set_header("Content-Type", "image/jpeg");
-
-        //  }
-
         return res;
     });
     app.bindaddr("172.18.162.174").port(8080).multithreaded().run();
