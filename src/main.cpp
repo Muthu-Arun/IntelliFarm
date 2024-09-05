@@ -1,10 +1,10 @@
 #include<iostream>
 #include<crow.h>
 #include<fstream>
-
+#include<string>
 // #define CROW_STATIC_DIRECTORY "./src/static" 
 crow::mustache::rendered_template render_page();
-int main()
+int main(int argv, char** args)
 {
     // std::string css_cache;
     // std::stringstream css_buffer;
@@ -50,7 +50,10 @@ int main()
         res.set_header("Content-Type", "image/jpeg");
         return res;
     });
-    app.bindaddr("172.18.162.174").port(8080).multithreaded().run();
+    if(argv == 2)
+        app.bindaddr("127.0.0.1").port(std::stoi(args[1])).multithreaded().run();
+    else
+        app.bindaddr("172.18.162.174").port(8080).multithreaded().run();
 }
   
 crow::mustache::rendered_template render_page(){
