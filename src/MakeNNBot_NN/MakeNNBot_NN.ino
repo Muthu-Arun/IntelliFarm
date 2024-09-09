@@ -1,3 +1,20 @@
+/************************************************
+   Make: Arduino Neural Network Robot
+   01/11/2017
+   This firmware is comprised of various open source libraries and examples.
+   Original elements created by Sean Hodgins
+   This firmware is free and open source and can be found here: https://github.com/idlehandsproject/makennbot
+
+   Information on the Neural Network and the code
+   can be found here: http://robotics.hobbizine.com/arduinoann.html
+
+   For the OLED screen, the U8G2 library can be found here: https://github.com/olikraus/u8g2
+
+*/
+
+#include <Arduino.h>
+#include <U8g2lib.h>
+#include "make_logo.h"
 
 #include <math.h>
 #define DEBUG
@@ -8,6 +25,8 @@
 #ifdef U8X8_HAVE_HW_I2C
 #include <Wire.h>
 #endif
+
+U8G2_SSD1306_64X48_ER_F_4W_SW_SPI u8g2(U8G2_R0, 9, 8, 11, 10, 12);
 
 int PH1, PH2, PH3, PH4;
 int PHEN = 38;
