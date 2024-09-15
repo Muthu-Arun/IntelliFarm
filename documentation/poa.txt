@@ -1,0 +1,22 @@
+PLAN OF ACTION
+
+->  Making the physical model to get real time weather data to feed the AI model
+
+->  Building the RESTAPI backend with a C++ framework for maximum performance and tight integration with AI tools
+
+->  A python backend for Data Analytics Tasks
+
+->  Nginx as load balencer and to serve static files for the website
+
+->  The physical model sends realtime weather data to the backend server which consists of pre-trained AI models to predict various aspects of Agriculture sector
+
+-> The farmer has access to all the information
+
+->  There is plan to implement autonomous BOTs to help in the farming process however that's beyond the scope of this project
+
+->  The AI models will be able to predict market prices or price crashes beforehand and also weather and advice farmers accordingly
+
+->  We present this as a solution for encountering the inefficiencies in the agriculture sector
+
+-> Plans to implement percision farming techniques in the future
+

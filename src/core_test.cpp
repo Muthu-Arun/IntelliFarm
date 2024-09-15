@@ -13,7 +13,7 @@ const int OutputNodes = 4;
 const float LearningRate = 0.3;
 const float Momentum = 0.9;
 const float InitialWeightMax = 0.5;
-const float Success = 0.0004;
+const float Success = 0.00001;
 
 const int Input[PatternCount][InputNodes] = {
   { 1, 1, 1, 1, 1, 1, 0 },  // 0
@@ -255,16 +255,20 @@ void toTerminal()
 {
 
   for( p = 0 ; p < PatternCount ; p++ ) { 
+    std::cout <<"\n" <<"Training Pattern " << p <<"\n" <<" Input";
     // Serial.println(); 
     // Serial.print ("  Training Pattern: ");
     // Serial.println (p);      
     // Serial.print ("  Input ");
     for( i = 0 ; i < InputNodes ; i++ ) {
+      std::cout << Input[p][i] << " ";
     //   Serial.print (Input[p][i], DEC);
     //   Serial.print (" ");
     }
+    std::cout <<" Target ";
     // Serial.print ("  Target ");
     for( i = 0 ; i < OutputNodes ; i++ ) {
+      std::cout << Target[p][i] << " ";
     //   Serial.print (Target[p][i], DEC);
     //   Serial.print (" ");
     }
@@ -292,7 +296,9 @@ void toTerminal()
       Output[i] = 1.0/(1.0 + exp(-Accum)) ; 
     }
     // Serial.print ("  Output ");
-    for( i = 0 ; i < OutputNodes ; i++ ) {       
+    std::cout<<" Output ";
+    for( i = 0 ; i < OutputNodes ; i++ ) {     
+      std::cout<< " Output " << Output[i] << " ";  
     //   Serial.print (Output[i], 5);
     //   Serial.print (" ");
     }
