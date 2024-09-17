@@ -38,15 +38,15 @@ std::vector<std::vector<int>> Target = {
     {1, 0, 0, 1}
 };
 
-std::vector<float> Hidden(HiddenNodes);
-std::vector<float> Output(OutputNodes);
-std::vector<std::vector<float>> HiddenWeights(InputNodes + 1,std::vector<float>(HiddenNodes));
-std::vector<std::vector<float>> OutputWeights(HiddenNodes + 1,std::vector<float>(OutputNodes));
-std::vector<float> HiddenDelta(HiddenNodes);
-std::vector<float> OutputDelta(OutputNodes);
-std::vector<std::vector<float>> ChangeHiddenWeights(InputNodes + 1,std::vector<float>(HiddenNodes));
-std::vector<std::vector<float>> ChangeOutputWeights(HiddenNodes + 1,std::vector<float>(OutputNodes));
-std::vector<float> RandomizedIndex(PatternCount);
+std::vector<float> Hidden;
+std::vector<float> Output;
+std::vector<std::vector<float>> HiddenWeights;
+std::vector<std::vector<float>> OutputWeights;
+std::vector<float> HiddenDelta;
+std::vector<float> OutputDelta;
+std::vector<std::vector<float>> ChangeHiddenWeights;
+std::vector<std::vector<float>> ChangeOutputWeights;
+std::vector<float> RandomizedIndex;
 // float Hidden[HiddenNodes];
 // float Output[OutputNodes];
 // float HiddenWeights[InputNodes + 1][HiddenNodes];
@@ -58,7 +58,18 @@ std::vector<float> RandomizedIndex(PatternCount);
 
 float Error;
 // int RandomizedIndex[PatternCount];
+void initializeVectors(){
+  Hidden.resize(HiddenNodes);
+  Output.resize(OutputNodes);
+  HiddenWeights.resize(InputNodes + 1,std::vector<float>(HiddenNodes));
+  OutputWeights.resize(HiddenNodes + 1,std::vector<float>(OutputNodes));
+  HiddenDelta.resize(HiddenNodes);
+  OutputDelta.resize(OutputNodes);
+  ChangeHiddenWeights.resize(InputNodes + 1,std::vector<float>(HiddenNodes));
+  ChangeOutputWeights.resize(HiddenNodes + 1,std::vector<float>(OutputNodes));
+  RandomizedIndex.resize(PatternCount);
 
+}
 
 
 void initializeWeights() {
@@ -164,13 +175,13 @@ void train() {
 }
 
 int main() {
-    srand(static_cast<unsigned>(time(0)));  // Seed for randomness
-
+    srand(static_cast<unsigned>(time(0)));  
+    initializeVectors();
     // Initialize training pattern index
     for (int i = 0; i < PatternCount; ++i) {
         RandomizedIndex[i] = i;
     }
-
+    
     initializeWeights();
     train();
     return 0;
