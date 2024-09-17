@@ -1,314 +1,167 @@
-#include <math.h>
-#include<iostream>
-#include<math.h>
-#include<chrono>
-/******************************************************************
- * Network Configuration - customized per network 
- ******************************************************************/
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 const int PatternCount = 10;
 const int InputNodes = 7;
 const int HiddenNodes = 8;
 const int OutputNodes = 4;
-const float LearningRate = 0.3;
+const float LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
 const float Momentum = 0.9;
 const float InitialWeightMax = 0.5;
 const float Success = 0.00001;
+const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
 
 const int Input[PatternCount][InputNodes] = {
-  { 1, 1, 1, 1, 1, 1, 0 },  // 0
-  { 0, 1, 1, 0, 0, 0, 0 },  // 1
-  { 1, 1, 0, 1, 1, 0, 1 },  // 2
-  { 1, 1, 1, 1, 0, 0, 1 },  // 3
-  { 0, 1, 1, 0, 0, 1, 1 },  // 4
-  { 1, 0, 1, 1, 0, 1, 1 },  // 5
-  { 0, 0, 1, 1, 1, 1, 1 },  // 6
-  { 1, 1, 1, 0, 0, 0, 0 },  // 7 
-  { 1, 1, 1, 1, 1, 1, 1 },  // 8
-  { 1, 1, 1, 0, 0, 1, 1 }   // 9
-}; 
-
-const int Target[PatternCount][OutputNodes] = {
-  { 0, 0, 0, 0 },  
-  { 0, 0, 0, 1 }, 
-  { 0, 0, 1, 0 }, 
-  { 0, 0, 1, 1 }, 
-  { 0, 1, 0, 0 }, 
-  { 0, 1, 0, 1 }, 
-  { 0, 1, 1, 0 }, 
-  { 0, 1, 1, 1 }, 
-  { 1, 0, 0, 0 }, 
-  { 1, 0, 0, 1 } 
+    {1, 1, 1, 1, 1, 1, 0},  // 0
+    {0, 1, 1, 0, 0, 0, 0},  // 1
+    {1, 1, 0, 1, 1, 0, 1},  // 2
+    {1, 1, 1, 1, 0, 0, 1},  // 3
+    {0, 1, 1, 0, 0, 1, 1},  // 4
+    {1, 0, 1, 1, 0, 1, 1},  // 5
+    {0, 0, 1, 1, 1, 1, 1},  // 6
+    {1, 1, 1, 0, 0, 0, 0},  // 7
+    {1, 1, 1, 1, 1, 1, 1},  // 8
+    {1, 1, 1, 0, 0, 1, 1}   // 9
 };
 
-/******************************************************************
- * End Network Configuration
- ******************************************************************/
-
-
-int i, j, p, q, r;
-int ReportEvery1000;
-int RandomizedIndex[PatternCount];
-long  TrainingCycle;
-float Rando;
-float Error;
-float Accum;
-
+const int Target[PatternCount][OutputNodes] = {
+    {0, 0, 0, 0},
+    {0, 0, 0, 1},
+    {0, 0, 1, 0},
+    {0, 0, 1, 1},
+    {0, 1, 0, 0},
+    {0, 1, 0, 1},
+    {0, 1, 1, 0},
+    {0, 1, 1, 1},
+    {1, 0, 0, 0},
+    {1, 0, 0, 1}
+};
 
 float Hidden[HiddenNodes];
 float Output[OutputNodes];
-float HiddenWeights[InputNodes+1][HiddenNodes];
-float OutputWeights[HiddenNodes+1][OutputNodes];
+float HiddenWeights[InputNodes + 1][HiddenNodes];
+float OutputWeights[HiddenNodes + 1][OutputNodes];
 float HiddenDelta[HiddenNodes];
 float OutputDelta[OutputNodes];
-float ChangeHiddenWeights[InputNodes+1][HiddenNodes];
-float ChangeOutputWeights[HiddenNodes+1][OutputNodes];
-void toTerminal();
+float ChangeHiddenWeights[InputNodes + 1][HiddenNodes];
+float ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
 
-int random(int max) {
-    // Seed the random number generator with the current time
+float Error;
+int RandomizedIndex[PatternCount];
+
+void initializeWeights() {
+    for (int i = 0; i < HiddenNodes; ++i) {
+        for (int j = 0; j <= InputNodes; ++j) {
+            HiddenWeights[j][i] = 2.0 * (float(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
+            ChangeHiddenWeights[j][i] = 0.0;
+        }
+    }
     
-    
-    // Generate a random number between 0 and max (inclusive)
-    return std::rand() % (max);
+    for (int i = 0; i < OutputNodes; ++i) {
+        for (int j = 0; j <= HiddenNodes; ++j) {
+            OutputWeights[j][i] = 2.0 * (float(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
+            ChangeOutputWeights[j][i] = 0.0;
+        }
+    }
 }
 
-void setup(){
-//   Serial.begin(9600);
-//   randomSeed(analogRead(3));
-  ReportEvery1000 = 1;
-  for( p = 0 ; p < PatternCount ; p++ ) {    
-    RandomizedIndex[p] = p ;
-  }
-}  
-
-void train (){
-
-
-/******************************************************************
-* Initialize HiddenWeights and ChangeHiddenWeights 
-******************************************************************/
-
-  for( i = 0 ; i < HiddenNodes ; i++ ) {    
-    for( j = 0 ; j <= InputNodes ; j++ ) { 
-      ChangeHiddenWeights[j][i] = 0.0 ;
-      Rando = float(random(100))/100;
-      HiddenWeights[j][i] = 2.0 * ( Rando - 0.5 ) * InitialWeightMax ;
-    }
-  }
-/******************************************************************
-* Initialize OutputWeights and ChangeOutputWeights
-******************************************************************/
-
-  for( i = 0 ; i < OutputNodes ; i ++ ) {    
-    for( j = 0 ; j <= HiddenNodes ; j++ ) {
-      ChangeOutputWeights[j][i] = 0.0 ;  
-      Rando = float(random(100))/100;        
-      OutputWeights[j][i] = 2.0 * ( Rando - 0.5 ) * InitialWeightMax ;
-    }
-  }
-//   Serial.println("Initial/Untrained Outputs: ");
-  toTerminal();
-/******************************************************************
-* Begin training 
-******************************************************************/
-
-  for( TrainingCycle = 1 ; TrainingCycle < 2147483647 ; TrainingCycle++) {    
-
-/******************************************************************
-* Randomize order of training patterns
-******************************************************************/
-
-    for( p = 0 ; p < PatternCount ; p++) {
-      q = random(PatternCount);
-      r = RandomizedIndex[p] ; 
-      RandomizedIndex[p] = RandomizedIndex[q] ; 
-      RandomizedIndex[q] = r ;
-    }
-    Error = 0.0 ;
-/******************************************************************
-* Cycle through each training pattern in the randomized order
-******************************************************************/
-    for( q = 0 ; q < PatternCount ; q++ ) {    
-      p = RandomizedIndex[q];
-
-/******************************************************************
-* Compute hidden layer activations
-******************************************************************/
-
-      for( i = 0 ; i < HiddenNodes ; i++ ) {    
-        Accum = HiddenWeights[InputNodes][i] ;
-        for( j = 0 ; j < InputNodes ; j++ ) {
-          Accum += Input[p][j] * HiddenWeights[j][i] ;
+void feedForward(int p) {
+    for (int i = 0; i < HiddenNodes; ++i) {
+        float sum = HiddenWeights[InputNodes][i];  // Bias term
+        for (int j = 0; j < InputNodes; ++j) {
+            sum += Input[p][j] * HiddenWeights[j][i];
         }
-        Hidden[i] = 1.0/(1.0 + exp(-Accum)) ;
-      }
-
-/******************************************************************
-* Compute output layer activations and calculate errors
-******************************************************************/
-
-      for( i = 0 ; i < OutputNodes ; i++ ) {    
-        Accum = OutputWeights[HiddenNodes][i] ;
-        for( j = 0 ; j < HiddenNodes ; j++ ) {
-          Accum += Hidden[j] * OutputWeights[j][i] ;
-        }
-        Output[i] = 1.0/(1.0 + exp(-Accum)) ;   
-        OutputDelta[i] = (Target[p][i] - Output[i]) * Output[i] * (1.0 - Output[i]) ;   
-        Error += 0.5 * (Target[p][i] - Output[i]) * (Target[p][i] - Output[i]) ;
-      }
-
-/******************************************************************
-* Backpropagate errors to hidden layer
-******************************************************************/
-
-      for( i = 0 ; i < HiddenNodes ; i++ ) {    
-        Accum = 0.0 ;
-        for( j = 0 ; j < OutputNodes ; j++ ) {
-          Accum += OutputWeights[i][j] * OutputDelta[j] ;
-        }
-        HiddenDelta[i] = Accum * Hidden[i] * (1.0 - Hidden[i]) ;
-      }
-
-
-/******************************************************************
-* Update Inner-->Hidden Weights
-******************************************************************/
-
-
-      for( i = 0 ; i < HiddenNodes ; i++ ) {     
-        ChangeHiddenWeights[InputNodes][i] = LearningRate * HiddenDelta[i] + Momentum * ChangeHiddenWeights[InputNodes][i] ;
-        HiddenWeights[InputNodes][i] += ChangeHiddenWeights[InputNodes][i] ;
-        for( j = 0 ; j < InputNodes ; j++ ) { 
-          ChangeHiddenWeights[j][i] = LearningRate * Input[p][j] * HiddenDelta[i] + Momentum * ChangeHiddenWeights[j][i];
-          HiddenWeights[j][i] += ChangeHiddenWeights[j][i] ;
-        }
-      }
-
-/******************************************************************
-* Update Hidden-->Output Weights
-******************************************************************/
-
-      for( i = 0 ; i < OutputNodes ; i ++ ) {    
-        ChangeOutputWeights[HiddenNodes][i] = LearningRate * OutputDelta[i] + Momentum * ChangeOutputWeights[HiddenNodes][i] ;
-        OutputWeights[HiddenNodes][i] += ChangeOutputWeights[HiddenNodes][i] ;
-        for( j = 0 ; j < HiddenNodes ; j++ ) {
-          ChangeOutputWeights[j][i] = LearningRate * Hidden[j] * OutputDelta[i] + Momentum * ChangeOutputWeights[j][i] ;
-          OutputWeights[j][i] += ChangeOutputWeights[j][i] ;
-        }
-      }
+        Hidden[i] = std::max(0.0f, sum);  // ReLU
     }
 
-/******************************************************************
-* Every 1000 cycles send data to terminal for display
-******************************************************************/
-    ReportEvery1000 = ReportEvery1000 - 1;
-    if (ReportEvery1000 == 0)
-    {
-    //   Serial.println(); 
-    //   Serial.println(); 
-    //   Serial.print ("TrainingCycle: ");
-    //   Serial.print (TrainingCycle);
-    //   Serial.print ("  Error = ");
-    //   Serial.println (Error, 5);
-    std::cout<<"Training Cycle "<<TrainingCycle<<"\n";
-    std::cout<<"Error =  "<<Error<<"\n";
-
-      toTerminal();
-
-      if (TrainingCycle==1)
-      {
-        ReportEvery1000 = 999;
-      }
-      else
-      {
-        ReportEvery1000 = 1000;
-      }
-    }    
-
-
-/******************************************************************
-* If error rate is less than pre-determined threshold then end
-******************************************************************/
-
-    if( Error < Success ) break ;  
-  }
-//   Serial.println ();
-//   Serial.println(); 
-//   Serial.print ("TrainingCycle: ");
-//   Serial.print (TrainingCycle);
-//   Serial.print ("  Error = ");
-//   Serial.println (Error, 5);
-
-  toTerminal();
-    std::cout<<"Training Set solved";
-//   Serial.println ();  
-//   Serial.println ();
-//   Serial.println ("Training Set Solved! ");
-//   Serial.println ("--------"); 
-//   Serial.println ();
-//   Serial.println ();  
-  ReportEvery1000 = 1;
+    for (int i = 0; i < OutputNodes; ++i) {
+        float sum = OutputWeights[HiddenNodes][i];  // Bias term
+        for (int j = 0; j < HiddenNodes; ++j) {
+            sum += Hidden[j] * OutputWeights[j][i];
+        }
+        Output[i] = std::max(0.0f, sum);  // ReLU
+    }
 }
 
-void toTerminal()
-{
+void backpropagate(int p) {
+    Error = 0.0;
 
-  for( p = 0 ; p < PatternCount ; p++ ) { 
-    std::cout <<"\n" <<"Training Pattern " << p <<"\n" <<" Input";
-    // Serial.println(); 
-    // Serial.print ("  Training Pattern: ");
-    // Serial.println (p);      
-    // Serial.print ("  Input ");
-    for( i = 0 ; i < InputNodes ; i++ ) {
-      std::cout << Input[p][i] << " ";
-    //   Serial.print (Input[p][i], DEC);
-    //   Serial.print (" ");
+    // Compute output layer deltas
+    for (int i = 0; i < OutputNodes; ++i) {
+        float delta = Target[p][i] - Output[i];
+        OutputDelta[i] = delta;
+        Error += delta * delta;
     }
-    std::cout <<" Target ";
-    // Serial.print ("  Target ");
-    for( i = 0 ; i < OutputNodes ; i++ ) {
-      std::cout << Target[p][i] << " ";
-    //   Serial.print (Target[p][i], DEC);
-    //   Serial.print (" ");
-    }
-/******************************************************************
-* Compute hidden layer activations
-******************************************************************/
+    Error *= 0.5;
 
-    for( i = 0 ; i < HiddenNodes ; i++ ) {    
-      Accum = HiddenWeights[InputNodes][i] ;
-      for( j = 0 ; j < InputNodes ; j++ ) {
-        Accum += Input[p][j] * HiddenWeights[j][i] ;
-      }
-      Hidden[i] = 1.0/(1.0 + exp(-Accum)) ;
+    // Compute hidden layer deltas
+    for (int i = 0; i < HiddenNodes; ++i) {
+        float sum = 0.0;
+        for (int j = 0; j < OutputNodes; ++j) {
+            sum += OutputWeights[i][j] * OutputDelta[j];
+        }
+        HiddenDelta[i] = (Hidden[i] > 0 ? sum : 0.0);  // ReLU derivative
     }
 
-/******************************************************************
-* Compute output layer activations and calculate errors
-******************************************************************/
-
-    for( i = 0 ; i < OutputNodes ; i++ ) {    
-      Accum = OutputWeights[HiddenNodes][i] ;
-      for( j = 0 ; j < HiddenNodes ; j++ ) {
-        Accum += Hidden[j] * OutputWeights[j][i] ;
-      }
-      Output[i] = 1.0/(1.0 + exp(-Accum)) ; 
+    // Update weights for hidden-to-output
+    for (int i = 0; i < OutputNodes; ++i) {
+        ChangeOutputWeights[HiddenNodes][i] = LearningRate * OutputDelta[i] + Momentum * ChangeOutputWeights[HiddenNodes][i];
+        OutputWeights[HiddenNodes][i] += ChangeOutputWeights[HiddenNodes][i];  // Update bias
+        for (int j = 0; j < HiddenNodes; ++j) {
+            ChangeOutputWeights[j][i] = LearningRate * Hidden[j] * OutputDelta[i] + Momentum * ChangeOutputWeights[j][i];
+            OutputWeights[j][i] += ChangeOutputWeights[j][i];
+        }
     }
-    // Serial.print ("  Output ");
-    std::cout<<" Output ";
-    for( i = 0 ; i < OutputNodes ; i++ ) {     
-      std::cout<< " Output " << Output[i] << " ";  
-    //   Serial.print (Output[i], 5);
-    //   Serial.print (" ");
+
+    // Update weights for input-to-hidden
+    for (int i = 0; i < HiddenNodes; ++i) {
+        ChangeHiddenWeights[InputNodes][i] = LearningRate * HiddenDelta[i] + Momentum * ChangeHiddenWeights[InputNodes][i];
+        HiddenWeights[InputNodes][i] += ChangeHiddenWeights[InputNodes][i];  // Update bias
+        for (int j = 0; j < InputNodes; ++j) {
+            ChangeHiddenWeights[j][i] = LearningRate * Input[p][j] * HiddenDelta[i] + Momentum * ChangeHiddenWeights[j][i];
+            HiddenWeights[j][i] += ChangeHiddenWeights[j][i];
+        }
     }
-  }
-
-
 }
 
-int main(){
-    std::srand(static_cast<unsigned>(std::time(nullptr)));
-    setup();
+void train() {
+    for (int cycle = 0; cycle < MaxTrainingCycles; ++cycle) {
+        // Randomize the order of patterns
+        for (int p = 0; p < PatternCount; ++p) {
+            int q = rand() % PatternCount;
+            std::swap(RandomizedIndex[p], RandomizedIndex[q]);
+        }
+
+        Error = 0.0;
+
+        for (int q = 0; q < PatternCount; ++q) {
+            int p = RandomizedIndex[q];
+            feedForward(p);
+            backpropagate(p);
+        }
+
+        if (cycle % 1000 == 0) {
+            std::cout << "Cycle " << cycle << ": Error = " << Error << std::endl;
+        }
+
+        if (Error < Success) {
+            std::cout << "Training complete. Error: " << Error << std::endl;
+            break;
+        }
+    }
+}
+
+int main() {
+    srand(static_cast<unsigned>(time(0)));  // Seed for randomness
+
+    // Initialize training pattern index
+    for (int i = 0; i < PatternCount; ++i) {
+        RandomizedIndex[i] = i;
+    }
+
+    initializeWeights();
     train();
+    return 0;
 }
