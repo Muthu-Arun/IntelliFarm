@@ -2,18 +2,17 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-
-const int PatternCount = 10;
-const int InputNodes = 7;
-const int HiddenNodes = 8;
-const int OutputNodes = 4;
+#include <vector>
+int PatternCount = 10;
+int InputNodes = 7;
+int HiddenNodes = 8;
+int OutputNodes = 4;
 const float LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
 const float Momentum = 0.9;
 const float InitialWeightMax = 0.5;
 const float Success = 0.00001;
 const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
-
-const int Input[PatternCount][InputNodes] = {
+std::vector<std::vector<int>> Input = {
     {1, 1, 1, 1, 1, 1, 0},  // 0
     {0, 1, 1, 0, 0, 0, 0},  // 1
     {1, 1, 0, 1, 1, 0, 1},  // 2
@@ -26,7 +25,7 @@ const int Input[PatternCount][InputNodes] = {
     {1, 1, 1, 0, 0, 1, 1}   // 9
 };
 
-const int Target[PatternCount][OutputNodes] = {
+std::vector<std::vector<int>> Target = {
     {0, 0, 0, 0},
     {0, 0, 0, 1},
     {0, 0, 1, 0},
@@ -39,17 +38,28 @@ const int Target[PatternCount][OutputNodes] = {
     {1, 0, 0, 1}
 };
 
-float Hidden[HiddenNodes];
-float Output[OutputNodes];
-float HiddenWeights[InputNodes + 1][HiddenNodes];
-float OutputWeights[HiddenNodes + 1][OutputNodes];
-float HiddenDelta[HiddenNodes];
-float OutputDelta[OutputNodes];
-float ChangeHiddenWeights[InputNodes + 1][HiddenNodes];
-float ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
+std::vector<float> Hidden(HiddenNodes);
+std::vector<float> Output(OutputNodes);
+std::vector<std::vector<float>> HiddenWeights(InputNodes + 1,std::vector<float>(HiddenNodes));
+std::vector<std::vector<float>> OutputWeights(HiddenNodes + 1,std::vector<float>(OutputNodes));
+std::vector<float> HiddenDelta(HiddenNodes);
+std::vector<float> OutputDelta(OutputNodes);
+std::vector<std::vector<float>> ChangeHiddenWeights(InputNodes + 1,std::vector<float>(HiddenNodes));
+std::vector<std::vector<float>> ChangeOutputWeights(HiddenNodes + 1,std::vector<float>(OutputNodes));
+std::vector<float> RandomizedIndex(PatternCount);
+// float Hidden[HiddenNodes];
+// float Output[OutputNodes];
+// float HiddenWeights[InputNodes + 1][HiddenNodes];
+// float OutputWeights[HiddenNodes + 1][OutputNodes];
+// float HiddenDelta[HiddenNodes];
+// float OutputDelta[OutputNodes];
+// float ChangeHiddenWeights[InputNodes + 1][HiddenNodes];
+// float ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
 
 float Error;
-int RandomizedIndex[PatternCount];
+// int RandomizedIndex[PatternCount];
+
+
 
 void initializeWeights() {
     for (int i = 0; i < HiddenNodes; ++i) {
