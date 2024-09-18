@@ -3,15 +3,15 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-int PatternCount = 10;
-int InputNodes = 7;
-int HiddenNodes = 8;
-int OutputNodes = 4;
-const float LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
-const float Momentum = 0.9;
-const float InitialWeightMax = 0.5;
-const float Success = 0.00001;
-const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
+static int PatternCount = 10;
+static int InputNodes = 7;
+static int HiddenNodes = 8;
+static int OutputNodes = 4;
+static const float LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
+static const float Momentum = 0.9;
+static const float InitialWeightMax = 0.5;
+static const float Success = 0.00001;
+static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
 std::vector<std::vector<int>> Input = {
     {1, 1, 1, 1, 1, 1, 0},  // 0
     {0, 1, 1, 0, 0, 0, 0},  // 1
@@ -38,15 +38,15 @@ std::vector<std::vector<int>> Target = {
     {1, 0, 0, 1}
 };
 
-std::vector<float> Hidden;
-std::vector<float> Output;
-std::vector<std::vector<float>> HiddenWeights;
-std::vector<std::vector<float>> OutputWeights;
-std::vector<float> HiddenDelta;
-std::vector<float> OutputDelta;
-std::vector<std::vector<float>> ChangeHiddenWeights;
-std::vector<std::vector<float>> ChangeOutputWeights;
-std::vector<float> RandomizedIndex;
+static std::vector<float> Hidden;
+static std::vector<float> Output;
+static std::vector<std::vector<float>> HiddenWeights;
+static std::vector<std::vector<float>> OutputWeights;
+static std::vector<float> HiddenDelta;
+static std::vector<float> OutputDelta;
+static std::vector<std::vector<float>> ChangeHiddenWeights;
+static std::vector<std::vector<float>> ChangeOutputWeights;
+static std::vector<float> RandomizedIndex;
 // float Hidden[HiddenNodes];
 // float Output[OutputNodes];
 // float HiddenWeights[InputNodes + 1][HiddenNodes];
@@ -56,9 +56,9 @@ std::vector<float> RandomizedIndex;
 // float ChangeHiddenWeights[InputNodes + 1][HiddenNodes];
 // float ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
 
-float Error;
+static float Error;
 // int RandomizedIndex[PatternCount];
-void initializeVectors(){
+static void initializeVectors(){
   Hidden.resize(HiddenNodes);
   Output.resize(OutputNodes);
   HiddenWeights.resize(InputNodes + 1,std::vector<float>(HiddenNodes));
@@ -72,7 +72,7 @@ void initializeVectors(){
 }
 
 
-void initializeWeights() {
+static void initializeWeights() {
     for (int i = 0; i < HiddenNodes; ++i) {
         for (int j = 0; j <= InputNodes; ++j) {
             HiddenWeights[j][i] = 2.0 * (float(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
@@ -88,7 +88,7 @@ void initializeWeights() {
     }
 }
 
-void feedForward(int p) {
+static void feedForward(int p) {
     for (int i = 0; i < HiddenNodes; ++i) {
         float sum = HiddenWeights[InputNodes][i];  // Bias term
         for (int j = 0; j < InputNodes; ++j) {
@@ -106,7 +106,7 @@ void feedForward(int p) {
     }
 }
 
-void backpropagate(int p) {
+static void backpropagate(int p) {
     Error = 0.0;
 
     // Compute output layer deltas
@@ -147,7 +147,7 @@ void backpropagate(int p) {
     }
 }
 
-void train() {
+static void train() {
     for (int cycle = 0; cycle < MaxTrainingCycles; ++cycle) {
         // Randomize the order of patterns
         for (int p = 0; p < PatternCount; ++p) {

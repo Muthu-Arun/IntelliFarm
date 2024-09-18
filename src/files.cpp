@@ -49,13 +49,13 @@ int main() {
         }
     }
     std::cin.get();
-    // Display the CSV content
-    for (const auto& row : data) {
-        for (const auto& column : row) {
-            std::cout << column << " ";
-        }
-        std::cout << std::endl;
-    }
+    // // Display the CSV content
+    // for (const auto& row : data) {
+    //     for (const auto& column : row) {
+    //         std::cout << column << " ";
+    //     }
+    //     std::cout << std::endl;
+    // }
 
     return 0;
 }
