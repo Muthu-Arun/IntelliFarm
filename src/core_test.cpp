@@ -12,7 +12,7 @@ static const float Momentum = 0.9;
 static const float InitialWeightMax = 0.5;
 static const float Success = 0.00001;
 static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
-std::vector<std::vector<int>> Input = {
+static std::vector<std::vector<int>> Input = {
     {1, 1, 1, 1, 1, 1, 0},  // 0
     {0, 1, 1, 0, 0, 0, 0},  // 1
     {1, 1, 0, 1, 1, 0, 1},  // 2
@@ -25,7 +25,7 @@ std::vector<std::vector<int>> Input = {
     {1, 1, 1, 0, 0, 1, 1}   // 9
 };
 
-std::vector<std::vector<int>> Target = {
+static std::vector<std::vector<int>> Target = {
     {0, 0, 0, 0},
     {0, 0, 0, 1},
     {0, 0, 1, 0},
