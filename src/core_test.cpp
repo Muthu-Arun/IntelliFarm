@@ -3,10 +3,10 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-static int PatternCount = 10;
-static int InputNodes = 7;
-static int HiddenNodes = 8;
-static int OutputNodes = 4;
+static int PatternCount;
+static int InputNodes ;
+static int HiddenNodes ;
+static int OutputNodes ;
 static const float LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
 static const float Momentum = 0.9;
 static const float InitialWeightMax = 0.5;
@@ -14,8 +14,8 @@ static const float Success = 0.00001;
 static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
 
 
-static void loadTrainingData();
-
+// static void loadTrainingData();
+void getDataset(std::vector<std::vector<int>>& _input,std::vector<std::vector<int>>& _target );
 
 static std::vector<std::vector<int>> Input;
 
@@ -41,6 +41,14 @@ static std::vector<float> RandomizedIndex;
 // float ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
 
 static float Error;
+
+static void initializeParameters(){
+    PatternCount = Input.size();
+    InputNodes = Input[0].size();
+    HiddenNodes = InputNodes+1;
+    OutputNodes = Target[0].size();
+
+}
 // int RandomizedIndex[PatternCount];
 static void initializeVectors(){
     Input.resize(PatternCount, std::vector<int>(InputNodes));
@@ -162,8 +170,10 @@ static void train() {
 
 int main() {
     srand(static_cast<unsigned>(time(0)));  
+    getDataset(Input,Target);
+    initializeParameters();
     initializeVectors();
-    loadTrainingData();
+    // loadTrainingData();
     // Initialize training pattern index
     for (int i = 0; i < PatternCount; ++i) {
         RandomizedIndex[i] = i;
