@@ -12,31 +12,15 @@ static const float Momentum = 0.9;
 static const float InitialWeightMax = 0.5;
 static const float Success = 0.00001;
 static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
-static std::vector<std::vector<int>> Input = {
-    {1, 1, 1, 1, 1, 1, 0},  // 0
-    {0, 1, 1, 0, 0, 0, 0},  // 1
-    {1, 1, 0, 1, 1, 0, 1},  // 2
-    {1, 1, 1, 1, 0, 0, 1},  // 3
-    {0, 1, 1, 0, 0, 1, 1},  // 4
-    {1, 0, 1, 1, 0, 1, 1},  // 5
-    {0, 0, 1, 1, 1, 1, 1},  // 6
-    {1, 1, 1, 0, 0, 0, 0},  // 7
-    {1, 1, 1, 1, 1, 1, 1},  // 8
-    {1, 1, 1, 0, 0, 1, 1}   // 9
-};
 
-static std::vector<std::vector<int>> Target = {
-    {0, 0, 0, 0},
-    {0, 0, 0, 1},
-    {0, 0, 1, 0},
-    {0, 0, 1, 1},
-    {0, 1, 0, 0},
-    {0, 1, 0, 1},
-    {0, 1, 1, 0},
-    {0, 1, 1, 1},
-    {1, 0, 0, 0},
-    {1, 0, 0, 1}
-};
+
+static void loadTrainingData();
+
+
+static std::vector<std::vector<int>> Input;
+
+static std::vector<std::vector<int>> Target;
+
 
 static std::vector<float> Hidden;
 static std::vector<float> Output;
@@ -59,6 +43,8 @@ static std::vector<float> RandomizedIndex;
 static float Error;
 // int RandomizedIndex[PatternCount];
 static void initializeVectors(){
+    Input.resize(PatternCount, std::vector<int>(InputNodes));
+    Target.resize(PatternCount, std::vector<int>(OutputNodes));
   Hidden.resize(HiddenNodes);
   Output.resize(OutputNodes);
   HiddenWeights.resize(InputNodes + 1,std::vector<float>(HiddenNodes));
@@ -177,6 +163,7 @@ static void train() {
 int main() {
     srand(static_cast<unsigned>(time(0)));  
     initializeVectors();
+    loadTrainingData();
     // Initialize training pattern index
     for (int i = 0; i < PatternCount; ++i) {
         RandomizedIndex[i] = i;
