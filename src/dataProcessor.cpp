@@ -47,7 +47,13 @@ void getDataset(std::vector<std::vector<int>>& _input,std::vector<std::vector<in
 
         _target.push_back(row);
     }
-    
+    for(int i = 0;i<_input.size();i++){
+        for(int j = 0; j< _input[i].size();j++){
+            std::cout<< _input[i][j] << " ";
+        }
+        std::cout<<"Target "<< _target[i][0] <<"\n ";
+
+    }
     file.close();
     // return data;
 
