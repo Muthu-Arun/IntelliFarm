@@ -126,6 +126,15 @@
     "thread": "cpp",
     "cinttypes": "cpp",
     "typeinfo": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "bitset": "cpp",
+    "cfenv": "cpp",
+    "complex": "cpp",
+    "forward_list": "cpp",
+    "set": "cpp",
+    "unordered_set": "cpp",
+    "ranges": "cpp",
+    "typeindex": "cpp",
+    "valarray": "cpp"
   }
 }
