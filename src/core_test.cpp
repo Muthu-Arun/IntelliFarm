@@ -7,40 +7,45 @@ static int PatternCount;
 static int InputNodes ;
 static int HiddenNodes ;
 static int OutputNodes ;
-static const float LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
-static const float Momentum = 0.9;
-static const float InitialWeightMax = 0.5;
-static const float Success = 0.00001;
+static const double LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
+static const double Momentum = 0.9;
+static const double InitialWeightMax = 0.5;
+static const double Success = 0.00001;
 static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
 
 
 // static void loadTrainingData();
-void getDataset(std::vector<std::vector<int>>& _input,std::vector<std::vector<int>>& _target );
+void getDataset(std::vector<std::vector<double>>& _input,std::vector<std::vector<double>>& _target );
 
-static std::vector<std::vector<int>> Input;
+static std::vector<std::vector<double>> Input;
 
-static std::vector<std::vector<int>> Target;
+static std::vector<std::vector<double>> Target;
+static double max(double x){
+    if(x >= 0)
+        return x;
+    else
+        return 0;
+}
 
+static std::vector<double> Hidden;
+static std::vector<double> Output;
+static std::vector<std::vector<double>> HiddenWeights;
+static std::vector<std::vector<double>> OutputWeights;
+static std::vector<double> HiddenDelta;
+static std::vector<double> OutputDelta;
+static std::vector<std::vector<double>> ChangeHiddenWeights;
+static std::vector<std::vector<double>> ChangeOutputWeights;
+static std::vector<double> RandomizedIndex;
+// double Hidden[HiddenNodes];
+// double Output[OutputNodes];
+// double HiddenWeights[InputNodes + 1][HiddenNodes];
+// double OutputWeights[HiddenNodes + 1][OutputNodes];
+// double HiddenDelta[HiddenNodes];
+// double OutputDelta[OutputNodes];
+// double ChangeHiddenWeights[InputNodes + 1][HiddenNodes];
+// double ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
 
-static std::vector<float> Hidden;
-static std::vector<float> Output;
-static std::vector<std::vector<float>> HiddenWeights;
-static std::vector<std::vector<float>> OutputWeights;
-static std::vector<float> HiddenDelta;
-static std::vector<float> OutputDelta;
-static std::vector<std::vector<float>> ChangeHiddenWeights;
-static std::vector<std::vector<float>> ChangeOutputWeights;
-static std::vector<float> RandomizedIndex;
-// float Hidden[HiddenNodes];
-// float Output[OutputNodes];
-// float HiddenWeights[InputNodes + 1][HiddenNodes];
-// float OutputWeights[HiddenNodes + 1][OutputNodes];
-// float HiddenDelta[HiddenNodes];
-// float OutputDelta[OutputNodes];
-// float ChangeHiddenWeights[InputNodes + 1][HiddenNodes];
-// float ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
-
-static float Error;
+static double Error;
 
 static void initializeParameters(){
     PatternCount = Input.size();
@@ -51,16 +56,16 @@ static void initializeParameters(){
 }
 // int RandomizedIndex[PatternCount];
 static void initializeVectors(){
-    Input.resize(PatternCount, std::vector<int>(InputNodes));
-    Target.resize(PatternCount, std::vector<int>(OutputNodes));
+    Input.resize(PatternCount, std::vector<double>(InputNodes));
+    Target.resize(PatternCount, std::vector<double>(OutputNodes));
   Hidden.resize(HiddenNodes);
   Output.resize(OutputNodes);
-  HiddenWeights.resize(InputNodes + 1,std::vector<float>(HiddenNodes));
-  OutputWeights.resize(HiddenNodes + 1,std::vector<float>(OutputNodes));
+  HiddenWeights.resize(InputNodes + 1,std::vector<double>(HiddenNodes));
+  OutputWeights.resize(HiddenNodes + 1,std::vector<double>(OutputNodes));
   HiddenDelta.resize(HiddenNodes);
   OutputDelta.resize(OutputNodes);
-  ChangeHiddenWeights.resize(InputNodes + 1,std::vector<float>(HiddenNodes));
-  ChangeOutputWeights.resize(HiddenNodes + 1,std::vector<float>(OutputNodes));
+  ChangeHiddenWeights.resize(InputNodes + 1,std::vector<double>(HiddenNodes));
+  ChangeOutputWeights.resize(HiddenNodes + 1,std::vector<double>(OutputNodes));
   RandomizedIndex.resize(PatternCount);
 
 }
@@ -69,14 +74,14 @@ static void initializeVectors(){
 static void initializeWeights() {
     for (int i = 0; i < HiddenNodes; ++i) {
         for (int j = 0; j <= InputNodes; ++j) {
-            HiddenWeights[j][i] = 2.0 * (float(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
+            HiddenWeights[j][i] = 2.0 * (double(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
             ChangeHiddenWeights[j][i] = 0.0;
         }
     }
     
     for (int i = 0; i < OutputNodes; ++i) {
         for (int j = 0; j <= HiddenNodes; ++j) {
-            OutputWeights[j][i] = 2.0 * (float(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
+            OutputWeights[j][i] = 2.0 * (double(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
             ChangeOutputWeights[j][i] = 0.0;
         }
     }
@@ -84,19 +89,19 @@ static void initializeWeights() {
 
 static void feedForward(int p) {
     for (int i = 0; i < HiddenNodes; ++i) {
-        float sum = HiddenWeights[InputNodes][i];  // Bias term
+        double sum = HiddenWeights[InputNodes][i];  // Bias term
         for (int j = 0; j < InputNodes; ++j) {
             sum += Input[p][j] * HiddenWeights[j][i];
         }
-        Hidden[i] = std::max(0.0f, sum);  // ReLU
+        Hidden[i] = max(sum);  // ReLU
     }
 
     for (int i = 0; i < OutputNodes; ++i) {
-        float sum = OutputWeights[HiddenNodes][i];  // Bias term
+        double sum = OutputWeights[HiddenNodes][i];  // Bias term
         for (int j = 0; j < HiddenNodes; ++j) {
             sum += Hidden[j] * OutputWeights[j][i];
         }
-        Output[i] = std::max(0.0f, sum);  // ReLU
+        Output[i] = max(sum);  // ReLU
     }
 }
 
@@ -105,7 +110,7 @@ static void backpropagate(int p) {
 
     // Compute output layer deltas
     for (int i = 0; i < OutputNodes; ++i) {
-        float delta = Target[p][i] - Output[i];
+        double delta = Target[p][i] - Output[i];
         OutputDelta[i] = delta;
         Error += delta * delta;
     }
@@ -113,7 +118,7 @@ static void backpropagate(int p) {
 
     // Compute hidden layer deltas
     for (int i = 0; i < HiddenNodes; ++i) {
-        float sum = 0.0;
+        double sum = 0.0;
         for (int j = 0; j < OutputNodes; ++j) {
             sum += OutputWeights[i][j] * OutputDelta[j];
         }
