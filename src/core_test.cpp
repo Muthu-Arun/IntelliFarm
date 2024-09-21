@@ -14,7 +14,7 @@ static const double Success = 0.00001;
 static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
 
 
-// static void loadTrainingData();
+
 void getDataset(std::vector<std::vector<double>>& _input,std::vector<std::vector<double>>& _target );
 void saveWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
 void loadWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
@@ -185,7 +185,6 @@ int main() {
     getDataset(Input,Target);
     initializeParameters();
     initializeVectors();
-    // loadTrainingData();
     // Initialize training pattern index
     for (int i = 0; i < PatternCount; ++i) {
         RandomizedIndex[i] = i;

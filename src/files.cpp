@@ -8,16 +8,18 @@ void saveWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vect
     for(std::vector<double>& row : _hidden){
         for(double i : row){
             hwfile.write(reinterpret_cast<const char*>(&i),sizeof(i));
-            // LOG(i);
+            LOG(i);
         }
+        LN;
     }
     hwfile.close();
     std::ofstream owfile("./dataSets/OutputWeights.bin",std::ios::binary);
     for(std::vector<double>& row : _output){
         for(double i : row){
             owfile.write(reinterpret_cast<const char*>(&i),sizeof(i));
-            // LOG
+            LOG(i);
         }
+        LN;
     }
     owfile.close();
 }
