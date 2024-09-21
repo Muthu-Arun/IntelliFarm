@@ -18,6 +18,8 @@ static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycle
 void getDataset(std::vector<std::vector<double>>& _input,std::vector<std::vector<double>>& _target );
 void saveWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
 void loadWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
+
+
 static std::vector<std::vector<double>> Input;
 
 static std::vector<std::vector<double>> Target;
@@ -37,14 +39,7 @@ static std::vector<double> OutputDelta;
 static std::vector<std::vector<double>> ChangeHiddenWeights;
 static std::vector<std::vector<double>> ChangeOutputWeights;
 static std::vector<double> RandomizedIndex;
-// double Hidden[HiddenNodes];
-// double Output[OutputNodes];
-// double HiddenWeights[InputNodes + 1][HiddenNodes];
-// double OutputWeights[HiddenNodes + 1][OutputNodes];
-// double HiddenDelta[HiddenNodes];
-// double OutputDelta[OutputNodes];
-// double ChangeHiddenWeights[InputNodes + 1][HiddenNodes];
-// double ChangeOutputWeights[HiddenNodes + 1][OutputNodes];
+
 
 static double Error;
 
@@ -174,6 +169,17 @@ static void train() {
     }
 }
 
+void predict(){
+    loadWeights(HiddenWeights,OutputWeights);
+    Input[0] = {1.0,1.0,1.0,0.0,0.0,0.0,0.0 };
+    feedForward(0);
+    std::cout<< "Predicted Output : ";
+    for(double i : Output){
+        std::cout<< i <<" ";
+    }
+    std::cout<<"\n\n";
+}
+
 int main() {
     srand(static_cast<unsigned>(time(0)));  
     getDataset(Input,Target);
@@ -185,8 +191,12 @@ int main() {
         RandomizedIndex[i] = i;
     }
     
-    initializeWeights();
-    train();
+
+    predict();
+    std::cin.get();
+    // initializeWeights();
+    // train();
+    std::cout<<"\n\n";
     saveWeights(HiddenWeights,OutputWeights);
     return 0;
 }
