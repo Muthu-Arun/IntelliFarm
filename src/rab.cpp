@@ -1,49 +1,14 @@
-#include <iostream>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
-#include <vector>
-static int PatternCount;
-static int InputNodes ;
-static int HiddenNodes ;
-static int OutputNodes ;
-static const double LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
-static const double Momentum = 0.9;
-static const double InitialWeightMax = 0.5;
-static const double Success = 0.00001;
-static const int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
+#include"rab.h"
 
-
-
-void getDataset(std::vector<std::vector<double>>& _input,std::vector<std::vector<double>>& _target );
-void saveWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
-void loadWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
-
-
-static std::vector<std::vector<double>> Input;
-
-static std::vector<std::vector<double>> Target;
-static double max(double x){
+double rab::max(double x){
     if(x >= 0)
         return x;
     else
         return 0;
 }
 
-static std::vector<double> Hidden;
-static std::vector<double> Output;
-static std::vector<std::vector<double>> HiddenWeights;
-static std::vector<std::vector<double>> OutputWeights;
-static std::vector<double> HiddenDelta;
-static std::vector<double> OutputDelta;
-static std::vector<std::vector<double>> ChangeHiddenWeights;
-static std::vector<std::vector<double>> ChangeOutputWeights;
-static std::vector<double> RandomizedIndex;
 
-
-static double Error;
-
-static void initializeParameters(){
+void rab::initializeParameters(){
     PatternCount = Input.size();
     InputNodes = Input[0].size();
     HiddenNodes = InputNodes+1;
@@ -51,7 +16,7 @@ static void initializeParameters(){
 
 }
 // int RandomizedIndex[PatternCount];
-static void initializeVectors(){
+void rab::initializeVectors(){
     Input.resize(PatternCount, std::vector<double>(InputNodes));
     Target.resize(PatternCount, std::vector<double>(OutputNodes));
   Hidden.resize(HiddenNodes);
@@ -67,7 +32,7 @@ static void initializeVectors(){
 }
 
 
-static void initializeWeights() {
+void rab::initializeWeights() {
     for (int i = 0; i < HiddenNodes; ++i) {
         for (int j = 0; j <= InputNodes; ++j) {
             HiddenWeights[j][i] = 2.0 * (double(rand()) / RAND_MAX - 0.5) * InitialWeightMax;
@@ -83,7 +48,7 @@ static void initializeWeights() {
     }
 }
 
-static void feedForward(int p) {
+void rab::feedForward(int p) {
     for (int i = 0; i < HiddenNodes; ++i) {
         double sum = HiddenWeights[InputNodes][i];  // Bias term
         for (int j = 0; j < InputNodes; ++j) {
@@ -101,7 +66,7 @@ static void feedForward(int p) {
     }
 }
 
-static void backpropagate(int p) {
+void rab::backpropagate(int p) {
     Error = 0.0;
 
     // Compute output layer deltas
@@ -142,7 +107,7 @@ static void backpropagate(int p) {
     }
 }
 
-static void train() {
+void rab::train() {
     for (int cycle = 0; cycle < MaxTrainingCycles; ++cycle) {
         // Randomize the order of patterns
         for (int p = 0; p < PatternCount; ++p) {
@@ -169,17 +134,33 @@ static void train() {
     }
 }
 
-void predict(){
+void rab::predict(std::vector<double>& _input){
     loadWeights(HiddenWeights,OutputWeights);
-    Input[0] = {1.0,1.0,1.0,0.0,0.0,0.0,0.0 };
-    feedForward(0);
-    std::cout<< "Predicted Output : ";
+    for (int i = 0; i < HiddenNodes; ++i) {
+        double sum = HiddenWeights[InputNodes][i];  // Bias term
+        for (int j = 0; j < InputNodes; ++j) {
+            sum += _input[j] * HiddenWeights[j][i];
+        }
+        Hidden[i] = max(sum);  // ReLU
+    }
+
+    for (int i = 0; i < OutputNodes; ++i) {
+        double sum = OutputWeights[HiddenNodes][i];  // Bias term
+        for (int j = 0; j < HiddenNodes; ++j) {
+            sum += Hidden[j] * OutputWeights[j][i];
+        }
+        Output[i] = max(sum);  // ReLU
+    }
     for(double i : Output){
         std::cout<< i <<" ";
     }
     std::cout<<"\n\n";
 }
 
+rab::rab(){
+
+}
+/*
 int main() {
     srand(static_cast<unsigned>(time(0)));  
     getDataset(Input,Target);
@@ -199,3 +180,4 @@ int main() {
     saveWeights(HiddenWeights,OutputWeights);
     return 0;
 }
+*/

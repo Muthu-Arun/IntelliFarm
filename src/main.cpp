@@ -2,6 +2,7 @@
 #include<crow.h>
 #include<fstream>
 #include<string>
+#include<rab.h>
 // #define CROW_STATIC_DIRECTORY "./src/static" 
 crow::mustache::rendered_template render_page();
 crow::response handleSensorData(const crow::request&);
