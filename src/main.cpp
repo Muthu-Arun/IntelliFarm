@@ -4,6 +4,7 @@
 #include<string>
 // #define CROW_STATIC_DIRECTORY "./src/static" 
 crow::mustache::rendered_template render_page();
+crow::response handleSensorData(const crow::request&);
 int main(int argv, char** args)
 {
     // std::string css_cache;
@@ -50,10 +51,11 @@ int main(int argv, char** args)
         res.set_header("Content-Type", "image/jpeg");
         return res;
     });
+        CROW_ROUTE(app,"/sensorData").methods(crow::HTTPMethod::POST)(handleSensorData);
     if(argv == 2)
         app.bindaddr("127.0.0.1").port(std::stoi(args[1])).multithreaded().run();
     else
-        app.bindaddr("172.18.162.174").port(8080).multithreaded().run();
+        app.bindaddr("172.18.163.52").port(8080).multithreaded().run();
 }
   
 crow::mustache::rendered_template render_page(){
@@ -61,4 +63,14 @@ crow::mustache::rendered_template render_page(){
         // Load the template from a file (or define it directly as a string)
         auto page = crow::mustache::load("./index.html").render();
         return page;  // Send the rendered HTML page.
+}
+
+
+crow::response handleSensorData(const crow::request& req){
+    crow::json::rvalue data = crow::json::load(req.body);
+    int temp = data["temperature"].i();
+    std::cout <<temp<<"\n";
+    crow::response res(200);
+    return res;
+    
 }
