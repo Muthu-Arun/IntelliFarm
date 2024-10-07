@@ -5,7 +5,7 @@
 #include<memory>
 #include<string>
 #define log(x) std::cout << x << "\n"
-void getDataset(std::vector<std::vector<double>>& _input,std::vector<std::vector<double>>& _target ){
+static void getDataset(std::vector<std::vector<double>>& _input,std::vector<std::vector<double>>& _target ){
 
     std::string fileName = "./dataSets/input.csv";  // CSV file to read
     std::ifstream file(fileName);

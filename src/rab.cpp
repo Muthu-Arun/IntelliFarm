@@ -132,10 +132,11 @@ void rab::train() {
             break;
         }
     }
+    saveWeights();
 }
 
 void rab::predict(std::vector<double>& _input){
-    loadWeights(HiddenWeights,OutputWeights);
+    loadWeights();
     for (int i = 0; i < HiddenNodes; ++i) {
         double sum = HiddenWeights[InputNodes][i];  // Bias term
         for (int j = 0; j < InputNodes; ++j) {
@@ -158,8 +159,29 @@ void rab::predict(std::vector<double>& _input){
 }
 
 rab::rab(){
-
+    std::cout<<"Constructor called \n";
+    srand(static_cast<unsigned>(time(0)));
 }
+
+void rab::loadTrainingData(){
+    getDataset();
+    initializeParameters();
+    initializeVectors();
+    initializeWeights();
+    // Initialize training pattern index
+    for (int i = 0; i < PatternCount; ++i) {
+        RandomizedIndex[i] = i;
+    }
+}
+
+void rab::setTrainingDataFile(std::string _input,std::string _target){
+    inputFile = _input; targetFile = _target;
+}
+
+void rab::setWeightsFile(std::string _hidden, std::string _output){
+    hiddenWeightsFile = _hidden; outputWeightsFile = _output;
+}
+
 /*
 int main() {
     srand(static_cast<unsigned>(time(0)));  
@@ -181,3 +203,133 @@ int main() {
     return 0;
 }
 */
+void rab::getDataset(){
+
+ 
+    std::ifstream file(inputFile);
+    
+    if (!file.is_open()) {
+        std::cerr << "Could not open the file: " << inputFile << std::endl;
+        
+    }
+
+    std::string line, word;
+    std::vector<std::vector<std::string>> data;
+    // std::vector<std::vector<int>> idata;
+    // Read each line from the file
+    while (std::getline(file, line)) {
+        std::stringstream s(line);
+        std::vector<std::string> row;
+        // std::cout<<"\n"<<s.str(); break;
+        // Parse each word (comma separated)
+        while (std::getline(s, word, ',')) {
+            row.push_back(word);
+        }
+        
+        data.push_back(row);
+        
+    }
+    for(int i = 0;i < data.size();i++){
+        std::vector<double> row;
+        for(int j = 0; j < data[i].size();j++){
+            // log(data[i][j]);
+            
+            row.push_back(std::stod(data[i][j]));
+        }
+        Input.push_back(row);
+    }
+    data.clear();
+    std::ifstream tfile(targetFile);
+        while (std::getline(tfile, line)) {
+        std::stringstream s(line);
+        std::vector<std::string> row;
+        // std::cout<<"\n"<<s.str(); break;
+        // Parse each word (comma separated)
+        while (std::getline(s, word, ',')) {
+            row.push_back(word);
+        }
+        
+        data.push_back(row);
+       
+    }
+    for(int i = 0;i < data.size();i++){
+        std::vector<double> row;
+        for(int j = 0; j < data[i].size();j++){
+            // log(data[i][j]);
+            
+            row.push_back(std::stod(data[i][j]));
+        }
+        Target.push_back(row);
+    }
+    // for(int i = 0;i<_input.size();i++){
+    //     for(int j = 0; j< _input[i].size();j++){
+    //         std::cout<< _input[i][j] << " ";
+    //     }
+    //     std::cout<<"Target "<< _target[i][0] <<"\n ";
+
+    // }
+    file.close();
+    tfile.close();
+    // return data;
+
+}
+
+void rab::saveWeights(){
+    std::ofstream hwfile(hiddenWeightsFile,std::ios::binary);
+    for(std::vector<double>& row : HiddenWeights){
+        for(double i : row){
+            hwfile.write(reinterpret_cast<const char*>(&i),sizeof(i));
+            // LOG(i);
+        }
+        // LN;
+    }
+    hwfile.close();
+    std::ofstream owfile(outputWeightsFile,std::ios::binary);
+    for(std::vector<double>& row : OutputWeights){
+        for(double i : row){
+            owfile.write(reinterpret_cast<const char*>(&i),sizeof(i));
+            // LOG(i);
+        }
+        // LN;
+    }
+    owfile.close();
+}
+
+void rab::loadWeights(){
+    std::ifstream owfile(outputWeightsFile,std::ios::binary);
+    for(std::vector<double>& row : OutputWeights){
+        for(double& i : row){
+            owfile.read(reinterpret_cast<char*>(&i),sizeof(i));
+            // LOG(i);
+        }
+        // LN;
+        
+    }
+    owfile.close();
+    std::ifstream hwfile(hiddenWeightsFile,std::ios::binary);
+    for(std::vector<double>& row : HiddenWeights){
+        for(double& i : row){
+            hwfile.read(reinterpret_cast<char*>(&i),sizeof(i));
+            // LOG(i);
+        }
+        // LN;
+        
+    }
+    hwfile.close();
+    
+}
+
+int maine(){
+    rab r;
+    r.setTrainingDataFile("./dataSets/input.csv","./dataSets/target.csv");
+    r.loadTrainingData();
+    r.train();
+}
+int main(){
+    rab r;
+    r.setWeightsFile("./dataSets/hiddenWeights.bin","./dataSets/OutputWeights.bin");
+    r.setTrainingDataFile("./dataSets/input.csv","./dataSets/target.csv");
+    r.loadTrainingData();
+    std::vector<double> sample = {1,1,1,1,1,1,0};
+    r.predict(sample);
+}

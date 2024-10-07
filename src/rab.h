@@ -3,10 +3,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-
-void getDataset(std::vector<std::vector<double>>& _input,std::vector<std::vector<double>>& _target );
-void saveWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
-void loadWeights(std::vector<std::vector<double>>& _hidden,std::vector<std::vector<double>>& _output);
+#include<fstream>
+#include<sstream>
 
 class rab{
 private: 
@@ -31,6 +29,9 @@ private:
     std::vector<std::vector<double>> ChangeOutputWeights;
     std::vector<double> RandomizedIndex;
     double Error;
+    std::string hiddenWeightsFile, outputWeightsFile;
+    std::string inputFile, targetFile; 
+
 private:
     double max(double);
     void initializeVectors();
@@ -38,10 +39,17 @@ private:
     void initializeWeights();
     void feedForward(int);
     void backpropagate(int);
+    void getDataset();
+    void saveWeights();
+    void loadWeights();
+
 
 public:
+    void setTrainingDataFile(std::string _input, std::string _target);
+    void setWeightsFile(std::string _hidden, std::string _output);
     void train();
     void predict(std::vector<double>&);
     rab();
+    void loadTrainingData();
     
 };
