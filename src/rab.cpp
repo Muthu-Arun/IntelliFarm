@@ -319,7 +319,7 @@ void rab::loadWeights(){
     
 }
 
-int maine(){
+void maine(){
     rab r;
     r.setTrainingDataFile("./dataSets/input.csv","./dataSets/target.csv");
     r.loadTrainingData();
@@ -330,6 +330,6 @@ int main(){
     r.setWeightsFile("./dataSets/hiddenWeights.bin","./dataSets/OutputWeights.bin");
     r.setTrainingDataFile("./dataSets/input.csv","./dataSets/target.csv");
     r.loadTrainingData();
-    std::vector<double> sample = {1,1,1,1,1,1,0};
+    std::vector<double> sample = {1,1,1,0,0,1,1};
     r.predict(sample);
 }
