@@ -136,7 +136,7 @@ void rab::train() {
 }
 
 void rab::predict(std::vector<double>& _input){
-    loadWeights();
+     loadWeights();
     for (int i = 0; i < HiddenNodes; ++i) {
         double sum = HiddenWeights[InputNodes][i];  // Bias term
         for (int j = 0; j < InputNodes; ++j) {
@@ -319,17 +319,20 @@ void rab::loadWeights(){
     
 }
 
-void maine(){
+int main(){
     rab r;
     r.setTrainingDataFile("./dataSets/input.csv","./dataSets/target.csv");
+    r.setWeightsFile("./dataSets/hiddenWeights.bin","./dataSets/OutputWeights.bin");
     r.loadTrainingData();
     r.train();
+    std::vector<double> sample = {1, 1, 1, 1, 1, 1, 0};
+    r.predict(sample);
 }
-int main(){
+int maine(){
     rab r;
     r.setWeightsFile("./dataSets/hiddenWeights.bin","./dataSets/OutputWeights.bin");
     r.setTrainingDataFile("./dataSets/input.csv","./dataSets/target.csv");
     r.loadTrainingData();
-    std::vector<double> sample = {1,1,1,0,0,1,1};
+    std::vector<double> sample = {0,0,0,1,1258.0,0};
     r.predict(sample);
 }

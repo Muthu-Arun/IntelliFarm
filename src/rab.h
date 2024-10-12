@@ -12,10 +12,10 @@ private:
     int InputNodes ;
     int HiddenNodes ;
     int OutputNodes ;
-    double LearningRate = 0.0001;   // Reduced learning rate for smoother convergence
+    double LearningRate = 0.00001;   // Reduced learning rate for smoother convergence
     double Momentum = 0.9;
     double InitialWeightMax = 0.5;
-    double Success = 0.00001;
+    double Success = 0.001;
     int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
     std::vector<std::vector<double>> Input;
     std::vector<std::vector<double>> Target;
