@@ -1,6 +1,6 @@
 #include<iostream>
-#include"sqlite3.h"
-
+#include"./../vendor/sqlite3/sqlite3.h"
+#include "./dbms.h"
 static int callback(void *data, int argc, char **argv, char **azColName) {
     for (int i = 0; i < argc; i++) {
         // std::cout<<"Running\n";
@@ -13,6 +13,7 @@ void test(){
     sqlite3* db;
     char* errmsg;
     int err;
+    //sqlite3_open
     if(sqlite3_open("newdb.db",&db)){
         std::cout<<"Can't open Database";
         return;
@@ -31,3 +32,21 @@ void test(){
     std::cout<<errmsg<<"\n";
 
 }
+namespace db{
+void insert(const userData &udt){
+    
+}
+void initialize(){
+    sqlite3* db;
+    char* errmsg;
+    int err;
+    //sqlite3_open
+    if(sqlite3_open("./newdb.db",&db)){
+        std::cout<<"Can't open Database";
+        return;
+    }
+    std::cout<<"Database Opened\n";
+}
+
+}
+

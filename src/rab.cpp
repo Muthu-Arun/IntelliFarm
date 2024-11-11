@@ -135,7 +135,7 @@ void rab::train() {
     saveWeights();
 }
 
-void rab::predict(std::vector<double>& _input){
+std::vector<double> rab::predict(const std::vector<double>& _input){
      loadWeights();
     for (int i = 0; i < HiddenNodes; ++i) {
         double sum = HiddenWeights[InputNodes][i];  // Bias term
@@ -156,6 +156,7 @@ void rab::predict(std::vector<double>& _input){
         std::cout<< i <<" ";
     }
     std::cout<<"\n\n";
+    return Output;
 }
 
 rab::rab(){
@@ -335,4 +336,5 @@ int maine(){
     r.loadTrainingData();
     std::vector<double> sample = {0,0,0,1,1258.0,0};
     r.predict(sample);
+    return 0;
 }

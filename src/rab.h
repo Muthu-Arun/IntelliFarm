@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
@@ -12,10 +13,10 @@ private:
     int InputNodes ;
     int HiddenNodes ;
     int OutputNodes ;
-    double LearningRate = 0.00001;   // Reduced learning rate for smoother convergence
+    double LearningRate = 0.01;   // Reduced learning rate for smoother convergence
     double Momentum = 0.9;
     double InitialWeightMax = 0.5;
-    double Success = 0.001;
+    double Success = 10;
     int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
     std::vector<std::vector<double>> Input;
     std::vector<std::vector<double>> Target;
@@ -48,8 +49,12 @@ public:
     void setTrainingDataFile(std::string _input, std::string _target);
     void setWeightsFile(std::string _hidden, std::string _output);
     void train();
-    void predict(std::vector<double>&);
+    std::vector<double> predict(const std::vector<double>&);
     rab();
     void loadTrainingData();
     
 };
+
+
+
+
