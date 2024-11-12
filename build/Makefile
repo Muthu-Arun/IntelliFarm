@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MyProject
+# Target rules for targets named server
 
 # Build rule for target.
-MyProject: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MyProject
-.PHONY : MyProject
+server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 server
+.PHONY : server
 
 # fast build rule for target.
-MyProject/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/build
-.PHONY : MyProject/fast
+server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
 
 src/dbms.o: src/dbms.cpp.o
 .PHONY : src/dbms.o
 
 # target to build an object file
 src/dbms.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/dbms.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/dbms.cpp.o
 .PHONY : src/dbms.cpp.o
 
 src/dbms.i: src/dbms.cpp.i
@@ -142,7 +142,7 @@ src/dbms.i: src/dbms.cpp.i
 
 # target to preprocess a source file
 src/dbms.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/dbms.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/dbms.cpp.i
 .PHONY : src/dbms.cpp.i
 
 src/dbms.s: src/dbms.cpp.s
@@ -150,7 +150,7 @@ src/dbms.s: src/dbms.cpp.s
 
 # target to generate assembly for a file
 src/dbms.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/dbms.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/dbms.cpp.s
 .PHONY : src/dbms.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -158,7 +158,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -166,7 +166,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -174,7 +174,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/rab.o: src/rab.cpp.o
@@ -182,7 +182,7 @@ src/rab.o: src/rab.cpp.o
 
 # target to build an object file
 src/rab.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/rab.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab.cpp.o
 .PHONY : src/rab.cpp.o
 
 src/rab.i: src/rab.cpp.i
@@ -190,7 +190,7 @@ src/rab.i: src/rab.cpp.i
 
 # target to preprocess a source file
 src/rab.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/rab.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab.cpp.i
 .PHONY : src/rab.cpp.i
 
 src/rab.s: src/rab.cpp.s
@@ -198,7 +198,7 @@ src/rab.s: src/rab.cpp.s
 
 # target to generate assembly for a file
 src/rab.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/rab.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab.cpp.s
 .PHONY : src/rab.cpp.s
 
 vendor/sqlite3/sqlite3.o: vendor/sqlite3/sqlite3.c.o
@@ -206,7 +206,7 @@ vendor/sqlite3/sqlite3.o: vendor/sqlite3/sqlite3.c.o
 
 # target to build an object file
 vendor/sqlite3/sqlite3.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/vendor/sqlite3/sqlite3.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o
 .PHONY : vendor/sqlite3/sqlite3.c.o
 
 vendor/sqlite3/sqlite3.i: vendor/sqlite3/sqlite3.c.i
@@ -214,7 +214,7 @@ vendor/sqlite3/sqlite3.i: vendor/sqlite3/sqlite3.c.i
 
 # target to preprocess a source file
 vendor/sqlite3/sqlite3.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/vendor/sqlite3/sqlite3.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.i
 .PHONY : vendor/sqlite3/sqlite3.c.i
 
 vendor/sqlite3/sqlite3.s: vendor/sqlite3/sqlite3.c.s
@@ -222,7 +222,7 @@ vendor/sqlite3/sqlite3.s: vendor/sqlite3/sqlite3.c.s
 
 # target to generate assembly for a file
 vendor/sqlite3/sqlite3.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/vendor/sqlite3/sqlite3.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.s
 .PHONY : vendor/sqlite3/sqlite3.c.s
 
 # Help Target
@@ -233,7 +233,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... MyProject"
+	@echo "... server"
 	@echo "... src/dbms.o"
 	@echo "... src/dbms.i"
 	@echo "... src/dbms.s"

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Set your project name
-project(MyProject)
+project(server)
 
 # Specify C++ standard
 set(CMAKE_CXX_STANDARD 17)

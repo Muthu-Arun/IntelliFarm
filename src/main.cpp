@@ -7,7 +7,7 @@
 #include "dbms.h"
 // #define CROW_STATIC_DIRECTORY "./src/static" 
 //crow::json::wvalue getWeatherPrediction(crow::json::rvalue);
-float genRandom(int maxval);
+static float genRandom(int maxval);
 crow::mustache::rendered_template render_page();
 crow::response handleSensorData(const crow::request&);
 crow::json::wvalue returnPrediction(const crow::request&);
@@ -17,6 +17,7 @@ int main(int argv, char** args)
 
     // std::string css_cache;
     // std::stringstream css_buffer;
+    ram_cache::initialize();
     crow::SimpleApp app; //define your crow application
     //define your endpoint at the root directory
     CROW_ROUTE(app, "/")(render_page);
@@ -86,9 +87,16 @@ crow::response handleSensorData(const crow::request& req){
 }
 */
 
-crow::response handelSensorData(const crow::request& req){
+crow::response handleSensorData(const crow::request& req){
     crow::json::rvalue w_data = crow::json::load(req.body);
+    ram_cache::wdata->temp = w_data["temperature"].d();
+    ram_cache::wdata->humidity = w_data["humidity"].d();
+    ram_cache::wdata->pressure = w_data["pressure"].d();
+    crow::response res(200);
+    return res;
+
 }
+/*
 crow::json::wvalue returnPrediction(const crow::request& req){
     crow::json::rvalue reqData; //= crow::json::load(req.body);
     crow::json::wvalue prediction;
@@ -99,7 +107,18 @@ crow::json::wvalue returnPrediction(const crow::request& req){
     return prediction;
 
 }
+*/
 
-float genRandom(int maxval){
+crow::json::wvalue returnPrediction(const crow::request& req){
+    crow::json::rvalue reqData; //= crow::json::load(req.body);
+    crow::json::wvalue prediction;
+    prediction["temperature"] = ram_cache::wdata->temp;
+//    prediction["rain"] = "Feature Under Development"; 
+    prediction["pressure"] = ram_cache::wdata->pressure;
+    prediction["humidity"] = ram_cache::wdata->humidity;
+    return prediction;
+
+}
+static float genRandom(int maxval){
     return (rand() % maxval);
 }

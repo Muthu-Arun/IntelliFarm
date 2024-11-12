@@ -212,7 +212,9 @@ CMakeFiles/MyProject.dir/src/main.cpp.o: /home/arun/dev/ecs/src/main.cpp \
   /home/arun/dev/ecs/vendor/crow/crow/socket_adaptors.h \
   /home/arun/dev/ecs/vendor/crow/crow/task_timer.h \
   /home/arun/dev/ecs/vendor/crow/crow/websocket.h \
+  /home/arun/dev/ecs/vendor/sqlite3/sqlite3.h \
   /home/arun/dev/ecs/src/run.h \
+  /home/arun/dev/ecs/src/dbms.h \
   /home/arun/dev/ecs/src/rab.h \
   /home/arun/dev/ecs/vendor/crow/asio.hpp \
   /home/arun/dev/ecs/vendor/crow/asio/any_completion_executor.hpp \
