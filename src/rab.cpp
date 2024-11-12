@@ -320,7 +320,7 @@ void rab::loadWeights(){
     
 }
 
-int main(){
+/*int main(){
     rab r;
     r.setTrainingDataFile("./../dataSets/tempinput.csv","./../dataSets/temptarget.csv");
     r.setWeightsFile("./../dataSets/hiddenWeights.bin","./../dataSets/OutputWeights.bin");
@@ -338,3 +338,4 @@ int maine(){
     r.predict(sample);
     return 0;
 }
+*/

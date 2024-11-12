@@ -4,6 +4,7 @@
 #include<string>
 #include<rab.h>
 #include "./run.h"
+#include "dbms.h"
 // #define CROW_STATIC_DIRECTORY "./src/static" 
 //crow::json::wvalue getWeatherPrediction(crow::json::rvalue);
 float genRandom(int maxval);
@@ -73,16 +74,21 @@ crow::mustache::rendered_template render_page(){
         return page;  // Send the rendered HTML page.
 }
 
-
+/*
 crow::response handleSensorData(const crow::request& req){
     crow::json::rvalue data = crow::json::load(req.body);
-    int temp = data["temperature"].i();
+    int temp = data["temperature"].d();
+    
     std::cout <<temp<<"\n";
     crow::response res(200);
     return res;
     
 }
+*/
 
+crow::response handelSensorData(const crow::request& req){
+    crow::json::rvalue w_data = crow::json::load(req.body);
+}
 crow::json::wvalue returnPrediction(const crow::request& req){
     crow::json::rvalue reqData; //= crow::json::load(req.body);
     crow::json::wvalue prediction;

@@ -1,0 +1,3 @@
+/home/arun/dev/ecs/build/CMakeFiles/MyProject.dir
+/home/arun/dev/ecs/build/CMakeFiles/edit_cache.dir
+/home/arun/dev/ecs/build/CMakeFiles/rebuild_cache.dir
