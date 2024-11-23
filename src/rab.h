@@ -16,7 +16,7 @@ private:
     double LearningRate = 0.01;   // Reduced learning rate for smoother convergence
     double Momentum = 0.9;
     double InitialWeightMax = 0.5;
-    double Success = 10;
+    double Success = 0.01f;
     int MaxTrainingCycles = 1000000;  // Safety limit on training cycles
     std::vector<std::vector<double>> Input;
     std::vector<std::vector<double>> Target;

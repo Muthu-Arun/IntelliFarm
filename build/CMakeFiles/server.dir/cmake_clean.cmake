@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/server.dir/src/main.cpp.o.d"
   "CMakeFiles/server.dir/src/rab.cpp.o"
   "CMakeFiles/server.dir/src/rab.cpp.o.d"
+  "CMakeFiles/server.dir/src/run.cpp.o"
+  "CMakeFiles/server.dir/src/run.cpp.o.d"
   "CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o"
   "CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o.d"
   "server"

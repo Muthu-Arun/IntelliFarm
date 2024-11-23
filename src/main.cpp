@@ -1,5 +1,5 @@
 #include<iostream>
-#include "./../vendor/crow/crow.h"
+#include "crow.h"
 #include<fstream>
 #include<string>
 #include<rab.h>
@@ -18,9 +18,12 @@ int main(int argv, char** args)
     // std::string css_cache;
     // std::stringstream css_buffer;
     ram_cache::initialize();
+    Ai::initialize();
+    std::vector<double> test = {30.2,30.2,30.2,36};
+    Ai::getPrediction(test);
     crow::SimpleApp app; //define your crow application
     //define your endpoint at the root directory
-    CROW_ROUTE(app, "/")(render_page);
+//    CROW_ROUTE(app, "/")(render_page);
     CROW_ROUTE(app, "/getPrediction")(returnPrediction);
     CROW_ROUTE(app, "/static/css/styles.css")([](){
         std::ifstream file("./src/static/css/styles.css",std::ios::binary);
@@ -97,6 +100,7 @@ crow::response handleSensorData(const crow::request& req){
 
 }
 /*
+ Fixed values for testing 
 crow::json::wvalue returnPrediction(const crow::request& req){
     crow::json::rvalue reqData; //= crow::json::load(req.body);
     crow::json::wvalue prediction;
@@ -119,6 +123,18 @@ crow::json::wvalue returnPrediction(const crow::request& req){
     return prediction;
 
 }
+/*
+crow::json::wvalue returnPrediction(const crow::request& req){
+    crow::json::rvalue reqData; //= crow::json::load(req.body);
+    crow::json::wvalue prediction;
+    prediction["temperature"] = 38;
+//    prediction["rain"] = "Feature Under Development"; 
+    prediction["pressure"] = 14.69;
+    prediction["humidity"] = 70;
+    return prediction;
+
+}
+*/
 static float genRandom(int maxval){
     return (rand() % maxval);
 }

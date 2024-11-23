@@ -20,6 +20,7 @@ add_executable(${PROJECT_NAME}
     ./src/dbms.cpp
     ./src/rab.cpp
     ./vendor/sqlite3/sqlite3.c
+    ./src/run.cpp
 )
 
 # Add any additional libraries if required

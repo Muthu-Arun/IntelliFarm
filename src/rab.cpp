@@ -156,7 +156,8 @@ std::vector<double> rab::predict(const std::vector<double>& _input){
         std::cout<< i <<" ";
     }
     std::cout<<"\n\n";
-    return Output;
+    std::vector<double> newVector = Output;
+    return newVector;
 }
 
 rab::rab(){

@@ -201,6 +201,30 @@ src/rab.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab.cpp.s
 .PHONY : src/rab.cpp.s
 
+src/run.o: src/run.cpp.o
+.PHONY : src/run.o
+
+# target to build an object file
+src/run.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/run.cpp.o
+.PHONY : src/run.cpp.o
+
+src/run.i: src/run.cpp.i
+.PHONY : src/run.i
+
+# target to preprocess a source file
+src/run.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/run.cpp.i
+.PHONY : src/run.cpp.i
+
+src/run.s: src/run.cpp.s
+.PHONY : src/run.s
+
+# target to generate assembly for a file
+src/run.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/run.cpp.s
+.PHONY : src/run.cpp.s
+
 vendor/sqlite3/sqlite3.o: vendor/sqlite3/sqlite3.c.o
 .PHONY : vendor/sqlite3/sqlite3.o
 
@@ -243,6 +267,9 @@ help:
 	@echo "... src/rab.o"
 	@echo "... src/rab.i"
 	@echo "... src/rab.s"
+	@echo "... src/run.o"
+	@echo "... src/run.i"
+	@echo "... src/run.s"
 	@echo "... vendor/sqlite3/sqlite3.o"
 	@echo "... vendor/sqlite3/sqlite3.i"
 	@echo "... vendor/sqlite3/sqlite3.s"
