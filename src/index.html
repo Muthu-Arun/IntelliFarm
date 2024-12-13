@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.3.5/justgage.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 20px;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .gauge-container {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .gauge-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Dashboard</h1>
+    <div class="dashboard">
+        <div class="gauge-container">
+            <div class="gauge-title">Humidity</div>
+            <div id="humidity-gauge"></div>
+        </div>
+        <div class="gauge-container">
+            <div class="gauge-title">Pressure</div>
+            <div id="pressure-gauge"></div>
+        </div>
+        <div class="gauge-container">
+            <div class="gauge-title">Rain</div>
+            <div id="rain-gauge"></div>
+        </div>
+        <div class="gauge-container">
+            <div class="gauge-title">Temperature</div>
+            <div id="temperature-gauge"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize JustGage Gauges
+        const humidityGauge = new JustGage({
+            id: "humidity-gauge",
+            value: 0,
+            min: 0,
+            max: 100,
+            title: "Humidity",
+            label: "%"
+        });
+
+        const pressureGauge = new JustGage({
+            id: "pressure-gauge",
+            value: 0,
+            min: 0,
+            max: 30, // Adjust max value as needed for your use case
+            title: "Pressure",
+            label: "psi"
+        });
+
+        const rainGauge = new JustGage({
+            id: "rain-gauge",
+            value: 0,
+            min: 0,
+            max: 10, // Adjust max value as needed for your use case
+            title: "Rain",
+            label: "mm"
+        });
+
+        const temperatureGauge = new JustGage({
+            id: "temperature-gauge",
+            value: 0,
+            min: -10, // Adjust min value as needed
+            max: 50,  // Adjust max value as needed
+            title: "Temperature",
+            label: "°C"
+        });
+
+        // Function to fetch data from the server
+        async function fetchWeatherData() {
+            try {
+                // Replace 'YOUR_SERVER_URL' with your actual server URL
+                const response = await fetch('http://172.18.163.52:8080/getPrediction');
+                const data = await response.json();
+
+                // Update the gauges with the received data
+                humidityGauge.refresh(data.humidity);
+                pressureGauge.refresh(data.pressure);
+                rainGauge.refresh(data.rain);
+                temperatureGauge.refresh(data.temperature);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        // Fetch data every 5 seconds
+        setInterval(fetchWeatherData, 5000);
+
+        // Initial data fetch
+        fetchWeatherData();
+    </script>
+</body>
+</html>
+

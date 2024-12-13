@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/arun/dev/ecs",
-      "program": "/home/arun/dev/ecs/build/Debug/outDebug",
+      "cwd": "/home/arun/dev/ecs/src",
+      "program": "/home/arun/dev/ecs/src/build/Release/outRelease",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

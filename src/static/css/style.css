@@ -1,0 +1,473 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('cloud-forest-landscape.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+  backdrop-filter: blur(10px);
+}
+
+.h2 {
+  color: #221a25;
+  user-select: none;
+  font-size: 2em;
+}
+
+.navigation a {
+  position: relative;
+  font-size: 1.1em;
+  color: #221a25;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 40px;
+  opacity: 0.7;
+  transition: color 0.3s;
+}
+
+.navigation .btnLogin-popup {
+  color: #221a25;
+  border-radius: 6px;
+  padding: 20px;
+  margin: 10px;
+  width: 160px;
+  height: 80px;
+  background: transparent;
+  border: 2px solid #ffffff;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-left: 40px;
+  transition: color 0.3s, background 0.3s;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  left: 0;
+  bottom: -6px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.navigation a:hover {
+  color: #ffffff;
+}
+
+.navigation .btnLogin-popup:hover {
+  color: #ffffff;
+  background: #221a25;
+}
+
+.navigation a:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.wrapper {
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  height: 450px;
+  backdrop-filter: blur(20px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.5s ease, height 0.2s ease;
+}
+
+.Registration {
+  border-radius: 20px;
+  width: 80%;
+  max-width: 600px;
+  height: 450px;
+  background-position: 50%;
+  backdrop-filter: blur(20px);
+  padding: 20px;
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.5s ease, height 0.2s ease;
+}
+
+.wrapper.active {
+  transform: translateX(400px);
+}
+
+.form-box {
+  width: 100%;
+  position: relative;
+  transition: transform 0.18s ease;
+  justify-content: space-between;
+}
+
+.form-box.login {
+  transform: translateX(0);
+}
+
+.form-box.register {
+  transform: translateX(400px);
+}
+
+.wrapper.active .form-box.login {
+  transform: translateX(-400px);
+}
+
+.wrapper.active .form-box.register {
+  transform: translateX(0);
+}
+
+.form-box h2 {
+  font-size: 2em;
+  color: #221a25;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #221a25;
+  margin: 30px 0;
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  font-size: 1em;
+  color: #221a25;
+  font-weight: 500;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: top 0.3s, font-size 0.3s;
+}
+
+.input-box input {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #221a25;
+  background: transparent;
+  outline: none;
+  font-size: 1em;
+  color: #221a25;
+  font-weight: 500;
+}
+
+.input-box .icon {
+  position: absolute;
+  right: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 0 35px 0 5px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.2em;
+  color: #221a25;
+  font-weight: 600;
+  line-height: 57px;
+  transition: 0.5s;
+}
+
+.icon {
+  position: absolute;
+  right: 8px;
+  padding: 0 35px 0 5px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.2em;
+  font-weight: 600;
+  line-height: 57px;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -20px;
+  font-size: 0.75em;
+}
+
+.Remember-forget {
+  font-size: 0.9em;
+  color: #221a25;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin: -15px 0 15px;
+}
+
+.Remember-forget label {
+  accent-color: #221a25;
+  font-size: 0.9em;
+  transition: color 0.3s;
+  margin-right: 3px;
+}
+
+.Remember-forget input[type="checkbox"] {
+  margin-right: 10px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.Remember-forget a {
+  color: #221a25;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: color 0.3s;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin: -15px 0 15px;
+  box-shadow: #221a25;
+}
+
+.Remember-forget a:hover {
+  color: #4a4a4a;
+}
+
+.passwordreset a {
+  color: #221a25;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: color 0.3s;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin: -15px 0 15px;
+  box-shadow: #221a25;
+}
+
+.passwordreset a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.aligemntbutton {
+  text-align: center;
+}
+
+/* Login/Register Toggle */
+.login-register {
+  text-align: center;
+}
+
+.login-register p {
+  font-size: 0.9em;
+  color: #221a25;
+}
+
+.login-register a {
+  color: #221a25;
+  text-decoration: none;
+}
+
+.login-register a:hover {
+  text-decoration: underline;
+}
+
+/* Firefly Animation Effect */
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -4px 0 0 -4px;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 10;
+  box-shadow: 0px 0px 8px 0px #FDFCA9 inset, 0px 0px 24px 0px #FFEB3B, 0px 0px 8px 0px #FFFFFF42;
+}
+
+.button-wrapper {
+  position: relative;
+}
+
+.button {
+  z-index: 1;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  appearance: none;
+  display: inline-block;
+}
+
+.button::before {
+  content: "";
+  box-shadow: 0px 0px 24px 0px #FFEB3B;
+  mix-blend-mode: screen;
+  transition: opacity 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 999px;
+  opacity: 0;
+}
+
+.button::after {
+  content: "";
+  box-shadow: 0px 0px 23px 0px #FDFCA9 inset, 0px 0px 8px 0px #FFFFFF42;
+  transition: opacity 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 999px;
+  opacity: 0;
+}
+
+.button-wrapper:hover .button::before,
+.button-wrapper:hover .button::after {
+  opacity: 1;
+}
+
+.dot {
+  display: block;
+  position: absolute;
+  transition: transform calc(var(--speed) / 12) ease;
+  width: var(--size);
+  height: var(--size);
+  transform: translate(var(--starting-x), var(--starting-y)) rotate(var(--rotatation));
+}
+
+.dot::after {
+  content: "";
+  animation: hoverFirefly var(--speed) infinite, dimFirefly calc(var(--speed) / 2) infinite calc(var(--speed) / 3);
+  animation-play-state: paused;
+  display: block;
+  border-radius: 100%;
+  background: yellow;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 6px 0px #FFEB3B, 0px 0px 4px 0px #FDFCA9 inset, 0px 0px 2px 1px #FFFFFF42;
+}
+
+.dot-1 {
+  --rotatation: 0deg;
+  --speed: 14s;
+  --size: 6px;
+  --starting-x: 30px;
+  --starting-y: 20px;
+  top: 2px;
+  left: -16px;
+  opacity: 0.7;
+}
+
+.dot-2 {
+  --rotatation: 122deg;
+  --speed: 16s;
+  --size: 3px;
+  --starting-x: 40px;
+  --starting-y: 10px;
+  top: 1px;
+  left: 0px;
+  opacity: 0.7;
+}
+
+.dot-3 {
+  --rotatation: 39deg;
+  --speed: 20s;
+  --size: 4px;
+  --starting-x: -10px;
+  --starting-y: 20px;
+  top: -8px;
+  right: 14px;
+}
+
+.dot-4 {
+  --rotatation: 220deg;
+  --speed: 18s;
+  --size: 2px;
+  --starting-x: -30px;
+  --starting-y: -5px;
+  bottom: 4px;
+  right: -14px;
+  opacity: 0.9;
+}
+
+.dot-5 {
+  --rotatation: 190deg;
+  --speed: 22s;
+  --size: 5px;
+  --starting-x: -40px;
+  --starting-y: -20px;
+  bottom: -6px;
+  right: -3px;
+}
+
+.dot-6 {
+  --rotatation: 20deg;
+  --speed: 15s;
+  --size: 4px;
+  --starting-x: 12px;
+  --starting-y: -18px;
+  bottom: -12px;
+  left: 30px;
+  opacity: 0.7;
+}
+
+.dot-7 {
+  --rotatation: 300deg;
+  --speed: 19s;
+  --size: 3px;
+  --starting-x: 6px;
+  --starting-y: -20px;
+  bottom: -16px;
+  left: 44px;
+}
+
+@keyframes dimFirefly {
+  0% { opacity: 1; }
+  25% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+  75% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes hoverFirefly {
+  0% { transform: translate(0, 0); }
+  12% { transform: translate(3px, 1px); }
+  24% { transform: translate(-2px, 3px); }
+  37% { transform: translate(2px, -2px); }
+  55% { transform: translate(-1px, 0); }
+  74% { transform: translate(0, 2px); }
+  88% { transform: translate(-3px, -1px); }
+  100% { transform: translate(0, 0); }
+}
