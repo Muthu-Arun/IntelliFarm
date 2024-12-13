@@ -1,5 +1,5 @@
 #pragma once
-#include "./../vendor/sqlite3/sqlite3.h"
+#include<sqlite3.h>
 #include <iostream>
 
 namespace db{

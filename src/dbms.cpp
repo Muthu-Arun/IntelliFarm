@@ -9,7 +9,7 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
     printf("\n");
     return 0;
 }
-void test(){
+static void test(){
     sqlite3* db;
     char* errmsg;
     int err;
@@ -64,6 +64,7 @@ void get(weatherData &wdt){
         std::cout << "Temperature = " << wdt.temp << ", Humidity  = " <<wdt.humidity<< ", Pressure = " << wdt.pressure << ", Source ID = " << wdt.source_id << std::endl;
     }
 }
+
 sqlite3_finalize(stmt);
 
 }
@@ -77,6 +78,7 @@ void initialize(){
     std::cout<<"Database Opened\n";
 }
 
+    
 }
 namespace ram_cache{
 db::weatherData *wdata;

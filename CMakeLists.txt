@@ -6,7 +6,7 @@ project(server)
 # Specify C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Include directories for header files
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
