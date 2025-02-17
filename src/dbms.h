@@ -1,32 +1,25 @@
 #pragma once
-#include<sqlite3.h>
 #include <iostream>
+#include <mysql_connection.h>
+#include <mysql_driver.h>
+#include <cppconn/statement.h>
+#include <cppconn/resultset.h>
+#include <memory>
+#include <cppconn/exception.h>
 
-namespace db{
-struct userData{
 
-    unsigned long id;
-    std::string name;
-    
-
-};
 struct weatherData{
     float temp, pressure, humidity;
     std::string location;
     unsigned long source_id;
 };
-extern sqlite3* db;
-extern char* errmsg;
-extern int err;
-void insert(const userData&);
-void get(weatherData&);
-void put(const weatherData&);
-void initialize();
-}
+class ram_cache{
+public:
+    static weatherData* wdata;
+    static void initialize();
+};
+namespace db {
+    void init();
 
-namespace ram_cache{
-extern db::weatherData* wdata;
-void initialize();
-void update(const db::weatherData&);
-void get(db::weatherData&);
 }
+    
