@@ -24,3 +24,14 @@ void db::insert_sensor_data(std::unique_ptr<sensor_value> sensor_data){
     table.insert("val","user_sensor_id").values(sensor_data->val,sensor_data->device_id).execute();
     
 }
+void db::add_device(std::unique_ptr<user_devices> new_device){
+    mysqlx::Table table = schema->getTable("user_sensors");
+    table.insert("user_id", "name", "metadata").values(new_device->user_id,new_device->Name, new_device->Metadata).execute();
+
+}
+void db::get_user_devices(std::unique_ptr<user> user){
+    int user_id;
+    mysqlx::Table device_table = schema->getTable("user_sensors");
+    mysqlx::Table user_table = schema->getTable("user");
+
+}
