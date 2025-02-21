@@ -5,13 +5,13 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3
+C_INCLUDES = -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3 -I/home/arun/dev/ecs/vendor/mysqlx
 
 C_FLAGS = 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3
+CXX_INCLUDES = -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3 -I/home/arun/dev/ecs/vendor/mysqlx
 
 CXX_FLAGS = -std=gnu++17
 

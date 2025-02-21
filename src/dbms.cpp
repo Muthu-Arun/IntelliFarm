@@ -1,16 +1,26 @@
 #include "dbms.h"
-#include <algorithm>
-void ram_cache::initialize() { wdata = new weatherData; }
-namespace db {
-void init() {
-  try {
-    sql::mysql::MySQL_Driver *driver = sql::mysql::get_driver_instance();
-    std::unique_ptr<sql::Connection> conn(
-        driver->connect("tcp://localhost:3306", "root", "new_password"));
-    conn->setSchema("intelliFarm");
+#include "xdevapi.h"
+#include <memory>
 
-  } catch (sql::SQLException &e) {
-    std::cerr << "Database Exception : " << e.what() << '\n';
-  }
+
+
+void db::init() {
+        try {
+            session = std::make_unique<mysqlx::Session>("localhost", 33060, "root", "new_password");
+            std::cout << "Database session initialized successfully.\n";
+            schema = std::make_unique<mysqlx::Schema>(session->getSchema("intelliFarm");
+        } catch (const mysqlx::Error &err) {
+            std::cerr << "Database Error: " << err.what() << std::endl;
+            exit(1);
+        }
 }
-} // namespace db
+void db::insert_new_user(std::unique_ptr<user> user_data){
+    mysqlx::Table table = schema->getTable("user");
+    table.insert("user_name","password","Name").values(user_data->user_name, user_data->password, user_data->name).execute();
+
+}
+void db::insert_sensor_data(std::unique_ptr<sensor_value> sensor_data){
+    mysqlx::Table table = schema->getTable("sensor");
+    table.insert("val","user_sensor_id").values(sensor_data->val,sensor_data->device_id).execute();
+    
+}

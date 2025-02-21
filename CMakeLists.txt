@@ -12,6 +12,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/vendor/crow
     ${CMAKE_SOURCE_DIR}/vendor/sqlite3
+    ${CMAKE_SOURCE_DIR}/vendor/mysqlx
 )
 
 # Add the executable and specify the source files
