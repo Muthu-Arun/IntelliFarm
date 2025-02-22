@@ -8,7 +8,7 @@ void db::init() {
         try {
             session = std::make_unique<mysqlx::Session>("localhost", 33060, "root", "new_password");
             std::cout << "Database session initialized successfully.\n";
-            schema = std::make_unique<mysqlx::Schema>(session->getSchema("intelliFarm");
+            schema = std::make_unique<mysqlx::Schema>(session->getSchema("intelliFarm"));
         } catch (const mysqlx::Error &err) {
             std::cerr << "Database Error: " << err.what() << std::endl;
             exit(1);
@@ -29,9 +29,10 @@ void db::add_device(std::unique_ptr<user_devices> new_device){
     table.insert("user_id", "name", "metadata").values(new_device->user_id,new_device->Name, new_device->Metadata).execute();
 
 }
-void db::get_user_devices(std::unique_ptr<user> user){
+void db::get_user_devices(std::unique_ptr<user> user){ 
     int user_id;
     mysqlx::Table device_table = schema->getTable("user_sensors");
     mysqlx::Table user_table = schema->getTable("user");
+    device_table.select("name","id","metadata").where("user_id = :usr_id").bind("usr_id", user->id).execute();
 
 }
