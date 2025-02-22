@@ -4,6 +4,7 @@
 #include <memory>
 #include "xdevapi.h"
 #include <chrono>
+#include<vector>
 struct user{
     int id;
     char user_name[128], password[128], name[200];
@@ -31,7 +32,7 @@ public:
     void insert_sensor_data(std::unique_ptr<sensor_value> sensor_data);
     void add_device(std::unique_ptr<user_devices> new_device);
     void init();
-    void get_user_devices(std::unique_ptr<user> user);
+    void get_user_devices(std::unique_ptr<user> user,std::vector<user_devices> devices);
 
 
 };
