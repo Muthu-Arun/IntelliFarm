@@ -1,7 +1,9 @@
 #include "dbms.h"
 #include "devapi/result.h"
+#include "devapi/row.h"
 #include "xdevapi.h"
 #include <memory>
+#include <vector>
 
 
 
@@ -30,11 +32,15 @@ void db::add_device(std::unique_ptr<user_devices> new_device){
     table.insert("user_id", "name", "metadata").values(new_device->user_id,new_device->Name, new_device->Metadata).execute();
 
 }
-void db::get_user_devices(std::unique_ptr<user> user,std::vector<user_devices> devices){ 
-    int user_id;
+void db::get_user_devices(std::unique_ptr<user> user,std::vector<user_devices>& devices){ 
     mysqlx::Table device_table = schema->getTable("user_sensors");
     mysqlx::Table user_table = schema->getTable("user");
-    
     mysqlx::RowResult res = device_table.select("name","id","metadata").where("user_id = :usr_id").bind("usr_id", user->id).execute();
-    
+    for(mysqlx::Row row : res.fetchAll()){
+        devices.emplace_back(user_devices(user->id,row[0].get<std::string>().c_str(),
+            row[2].get<std::string>().c_str()));
+    }
+}
+void db::get_sensor_data(int device_id){
+
 }
