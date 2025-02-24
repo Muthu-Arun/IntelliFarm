@@ -2,6 +2,7 @@
 #include "devapi/result.h"
 #include "devapi/row.h"
 #include "xdevapi.h"
+#include <ctime>
 #include <memory>
 #include <vector>
 
@@ -41,6 +42,10 @@ void db::get_user_devices(std::unique_ptr<user> user,std::vector<user_devices>& 
             row[2].get<std::string>().c_str()));
     }
 }
-void db::get_sensor_data(int device_id){
-
+void db::get_sensor_data(int device_id,std::vector<sensor_value>& vals){
+    mysqlx::Table sensor_table = schema->getTable("sensor");
+    mysqlx::RowResult res = sensor_table.select("val","timestamp").where("user_sensor_id = :device_id").bind("device_id",device_id).execute();
+    for(mysqlx::Row row : res.fetchAll()){
+        vals.emplace_back(sensor_value(row[0].get<float>(), row[1].get<std::time_t>()));
+    }
 }

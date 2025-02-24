@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <ctime>
 #include <iostream>
 #include <memory>
 #include "xdevapi.h"
@@ -14,6 +15,8 @@ struct user{
 struct sensor_value{
     float val;
     int device_id;
+    std::time_t timestamp;
+    sensor_value(float value,std::time_t ts) : val{value}, timestamp{ts} {}
     
 };
 struct user_devices{
@@ -38,7 +41,6 @@ public:
     void add_device(std::unique_ptr<user_devices> new_device);
     void init();
     void get_user_devices(std::unique_ptr<user> user,std::vector<user_devices>& devices);
-    void get_sensor_data(int device_id);
-
+    void get_sensor_data(int device_id,std::vector<sensor_value>& vals);
 
 };
