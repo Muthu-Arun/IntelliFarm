@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <cstring>
 #include <ctime>
 #include <iostream>
 #include <memory>
@@ -10,6 +11,11 @@
 struct user{
     int id;
     char user_name[128], password[128], name[200];
+    user(const char* usr_name, const char* password, const char* name){
+        strcpy(this->user_name,usr_name);
+        strcpy(this->password,password);
+        strcpy(this->name,name);
+    }
 
 };
 struct sensor_value{
@@ -17,6 +23,7 @@ struct sensor_value{
     int device_id;
     std::time_t timestamp;
     sensor_value(float value,std::time_t ts) : val{value}, timestamp{ts} {}
+    sensor_value(float value, int sensor_device_id) : val{value}, device_id{sensor_device_id} {}
     
 };
 struct user_devices{
