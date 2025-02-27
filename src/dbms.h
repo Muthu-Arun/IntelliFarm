@@ -16,7 +16,6 @@ struct user{
         strcpy(this->password,password);
         strcpy(this->name,name);
     }
-
 };
 struct sensor_value{
     float val;
@@ -37,12 +36,10 @@ struct user_devices{
     }
 };
 
-class db{
-private:
-    std::unique_ptr<mysqlx::Session> session;
-    std::unique_ptr<mysqlx::Schema> schema;
+namespace db{
+    inline std::unique_ptr<mysqlx::Session> session;
+    inline std::unique_ptr<mysqlx::Schema> schema;
     
-public:
     void insert_new_user(std::unique_ptr<user> user_data);
     void insert_sensor_data(std::unique_ptr<sensor_value> sensor_data);
     void add_device(std::unique_ptr<user_devices> new_device);
