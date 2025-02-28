@@ -28,12 +28,20 @@ struct sensor_value{
 struct user_devices{
     int user_id;
     char Name[200];
-    char Metadata[500];
+    int Metadata;
     
-    user_devices(int usr_id, const char* name, const char* metadata) : user_id{usr_id}{
+    user_devices(int usr_id, const char* name, int metadata) : user_id{usr_id},Metadata{metadata}{
         strcpy(Name,name);
-        strcpy(Metadata,metadata);
     }
+};
+struct sensor_metadata{
+    int id;
+    float min_val, max_val;
+    char Name[200];
+    sensor_metadata(int _id, float _min_val, float _max_val, const char* _name) : id{_id}, min_val{_min_val}, max_val{_max_val} {
+        strcpy(Name, _name);
+    }
+
 };
 
 namespace db{
@@ -46,5 +54,5 @@ namespace db{
     void init();
     void get_user_devices(std::unique_ptr<user> user,std::vector<user_devices>& devices);
     void get_sensor_data(int device_id,std::vector<sensor_value>& vals);
-
+    void add_sensor_metadata(std::unique_ptr<sensor_metadata> metadata);
 };

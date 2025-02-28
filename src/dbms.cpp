@@ -41,7 +41,7 @@ void get_user_devices(std::unique_ptr<user> user,std::vector<user_devices>& devi
     mysqlx::RowResult res = device_table.select("name","id","metadata").where("user_id = :usr_id").bind("usr_id", user->id).execute();
     for(mysqlx::Row row : res.fetchAll()){
         devices.emplace_back(user_devices(user->id,row[0].get<std::string>().c_str(),
-            row[2].get<std::string>().c_str()));
+            row[2].get<int>()));
     }
 }
 void get_sensor_data(int device_id,std::vector<sensor_value>& vals){
@@ -51,4 +51,9 @@ void get_sensor_data(int device_id,std::vector<sensor_value>& vals){
         vals.emplace_back(sensor_value(row[0].get<float>(), row[1].get<std::time_t>()));
     }
 }
+void add_sensor_metadata(std::unique_ptr<sensor_metadata> metadata){
+    mysqlx::Table sensor_metadata = schema->getTable("sensor_metadata");
+    sensor_metadata.insert("id","name","min_val","max_val").values(metadata->id,metadata->Name,metadata->min_val,metadata->max_val).execute();
+}
+
 }
