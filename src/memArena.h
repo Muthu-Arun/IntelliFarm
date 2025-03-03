@@ -13,7 +13,7 @@ t* get_memory(size_t sze = 1){
     return (t*)(rootptr+offset);
 }
 template<typename t>
-bool free_memory(t* item){
+void free_memory(t* item){
     std::ptrdiff_t offset = item - rootptr;
     memspace.erase((size_t)offset);
 }

@@ -1,6 +1,4 @@
 #include "memArena.h"
-#include <exception>
-#include <unordered_map>
 
 namespace memArena{
 std::byte* rootptr = nullptr;
