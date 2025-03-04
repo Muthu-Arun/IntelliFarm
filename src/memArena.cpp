@@ -1,4 +1,6 @@
 #include "memArena.h"
+#include <cstddef>
+#include <utility>
 
 namespace memArena{
 std::byte* rootptr = nullptr;
@@ -21,6 +23,12 @@ size_t search_free_spot(size_t block_size){
 
     }
     throw new std::exception;
+}
+void print_memory_pool_details(){
+    std::cout << "Used Spots\n";
+    for(const std::pair<size_t,size_t>& pair: memspace){
+        std::cout << "Starting : " << pair.first << "Block Size " << pair.second <<"\n";
+    }
 }
 
 }
