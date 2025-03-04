@@ -14,7 +14,7 @@ t* get_memory(size_t sze = 1){
 }
 template<typename t>
 void free_memory(t* item){
-    std::ptrdiff_t offset = item - rootptr;
+    std::ptrdiff_t offset = reinterpret_cast<char*>(item) - reinterpret_cast<char*>(rootptr);
     memspace.erase((size_t)offset);
 }
 }
