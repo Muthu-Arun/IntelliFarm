@@ -1,3 +1,4 @@
 memory_pool_test
 test
 dbms_test
+.cache/*
