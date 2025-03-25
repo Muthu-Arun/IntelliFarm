@@ -5,7 +5,7 @@
 namespace memArena{
 std::byte* rootptr = nullptr;
 size_t avail_space = 0;
-std::unordered_map<size_t,size_t> memspace;
+std::map<size_t,size_t> memspace;
 void init(size_t sze){
     rootptr =static_cast<std::byte*>(malloc(sze*((size_t) 1)));
     avail_space = sze;
@@ -16,6 +16,10 @@ size_t search_free_spot(size_t block_size){
     while(i<avail_space){
         auto iter = memspace.find(i);
         if(iter == memspace.end()){
+            auto nxt_key = memspace.upper_bound(i);
+            if(nxt_key->first < i+block_size)
+                break;
+            
             memspace[i] = block_size;
             return i;
         }
