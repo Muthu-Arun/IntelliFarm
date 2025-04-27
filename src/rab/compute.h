@@ -31,3 +31,27 @@ double calculate_standard_deviation(const std::vector<t>& data) {
 }
 
 }
+template<typename t>
+class tensor{
+    private:
+        t* data = nullptr;
+        std::vector<size_t> m_dims;
+        bool memory_alloc(){
+            size_t s = 1;
+            for(size_t i : m_dims){s*= i;}
+            data = new t[s];
+            
+        }
+    public:
+        tensor() = default;
+        tensor(std::vector<size_t> dims): m_dims(dims){
+
+        }
+        ~tensor(){
+            delete [] data;
+        }
+
+
+
+
+};

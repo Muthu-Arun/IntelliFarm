@@ -19,9 +19,7 @@ namespace db{
 }
 
 void insert_new_user(const user& user_data){
-//    std::cin.get();
     static mysqlx::Table table = schema->getTable("user");
-//  std::cin.get();
     table.insert("user_name","password","Name").values(user_data.user_name, user_data.password, user_data.name).execute();
 
 }
