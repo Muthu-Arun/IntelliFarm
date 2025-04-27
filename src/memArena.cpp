@@ -19,7 +19,6 @@ size_t search_free_spot(size_t block_size){
             auto nxt_key = memspace.upper_bound(i);
             if(nxt_key->first < i+block_size)
                 break;
-            
             memspace[i] = block_size;
             return i;
         }

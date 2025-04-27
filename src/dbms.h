@@ -1,16 +1,12 @@
 #pragma once
-#include <algorithm>
 #include <cstring>
 #include <ctime>
-#include <iostream>
 #include <memory>
-#include <chrono>
 #include<vector>
-#include<string>
 #include "devapi/result.h"
-#include "devapi/row.h"
 #include "xdevapi.h"
 #include <ctime>
+#include <iostream>
 struct user{
     int id;
     char user_name[128], password[128], name[200];
@@ -46,16 +42,31 @@ struct sensor_metadata{
     }
 
 };
+struct actuator{
+    int id;
+    enum class Type{
+        NOT_ASSIGNED = 0,
+        ANALOG_ONLY = 1,
+        DIGITAL_ONLY = 2,
+        ANALOG_AND_DIGITAL = 3
+
+    };
+    Type type = Type::NOT_ASSIGNED;
+    bool state;
+    float val;
+    actuator(int _id,Type,bool state = 0, float val = 0.0f );
+};
 
 namespace db{
+
     inline std::unique_ptr<mysqlx::Session> session;
     inline std::unique_ptr<mysqlx::Schema> schema;
     
-    void insert_new_user(user* user_data);
-    void insert_sensor_data(sensor_value* sensor_data);
-    void add_device(user_devices* new_device);
+    void insert_new_user(const user& user_data);
+    void insert_sensor_data(const sensor_value& sensor_data);
+    void add_device(const user_devices& new_device);
     void init();
-    void get_user_devices(user* user,std::vector<user_devices>& devices);
+    void get_user_devices(const user& user,std::vector<user_devices>& devices);
     void get_sensor_data(int device_id,std::vector<sensor_value>& vals);
-    void add_sensor_metadata(sensor_metadata* metadata);
+    void add_sensor_metadata(const sensor_metadata& metadata);
 }

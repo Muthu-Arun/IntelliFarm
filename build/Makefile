@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/arun/dev/ecs
+CMAKE_SOURCE_DIR = /home/arun/dev/IntelliFarm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/arun/dev/ecs/build
+CMAKE_BINARY_DIR = /home/arun/dev/IntelliFarm/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/arun/dev/ecs/build/CMakeFiles /home/arun/dev/ecs/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arun/dev/IntelliFarm/build/CMakeFiles /home/arun/dev/IntelliFarm/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/arun/dev/ecs/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arun/dev/IntelliFarm/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,29 +177,29 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/rab.o: src/rab.cpp.o
-.PHONY : src/rab.o
+src/rab/rab.o: src/rab/rab.cpp.o
+.PHONY : src/rab/rab.o
 
 # target to build an object file
-src/rab.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab.cpp.o
-.PHONY : src/rab.cpp.o
+src/rab/rab.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab/rab.cpp.o
+.PHONY : src/rab/rab.cpp.o
 
-src/rab.i: src/rab.cpp.i
-.PHONY : src/rab.i
+src/rab/rab.i: src/rab/rab.cpp.i
+.PHONY : src/rab/rab.i
 
 # target to preprocess a source file
-src/rab.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab.cpp.i
-.PHONY : src/rab.cpp.i
+src/rab/rab.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab/rab.cpp.i
+.PHONY : src/rab/rab.cpp.i
 
-src/rab.s: src/rab.cpp.s
-.PHONY : src/rab.s
+src/rab/rab.s: src/rab/rab.cpp.s
+.PHONY : src/rab/rab.s
 
 # target to generate assembly for a file
-src/rab.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab.cpp.s
-.PHONY : src/rab.cpp.s
+src/rab/rab.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/rab/rab.cpp.s
+.PHONY : src/rab/rab.cpp.s
 
 src/run.o: src/run.cpp.o
 .PHONY : src/run.o
@@ -225,30 +225,6 @@ src/run.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/run.cpp.s
 .PHONY : src/run.cpp.s
 
-vendor/sqlite3/sqlite3.o: vendor/sqlite3/sqlite3.c.o
-.PHONY : vendor/sqlite3/sqlite3.o
-
-# target to build an object file
-vendor/sqlite3/sqlite3.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o
-.PHONY : vendor/sqlite3/sqlite3.c.o
-
-vendor/sqlite3/sqlite3.i: vendor/sqlite3/sqlite3.c.i
-.PHONY : vendor/sqlite3/sqlite3.i
-
-# target to preprocess a source file
-vendor/sqlite3/sqlite3.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.i
-.PHONY : vendor/sqlite3/sqlite3.c.i
-
-vendor/sqlite3/sqlite3.s: vendor/sqlite3/sqlite3.c.s
-.PHONY : vendor/sqlite3/sqlite3.s
-
-# target to generate assembly for a file
-vendor/sqlite3/sqlite3.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.s
-.PHONY : vendor/sqlite3/sqlite3.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -264,15 +240,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/rab.o"
-	@echo "... src/rab.i"
-	@echo "... src/rab.s"
+	@echo "... src/rab/rab.o"
+	@echo "... src/rab/rab.i"
+	@echo "... src/rab/rab.s"
 	@echo "... src/run.o"
 	@echo "... src/run.i"
 	@echo "... src/run.s"
-	@echo "... vendor/sqlite3/sqlite3.o"
-	@echo "... vendor/sqlite3/sqlite3.i"
-	@echo "... vendor/sqlite3/sqlite3.s"
 .PHONY : help
 
 

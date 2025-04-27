@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_dbms.dir/src/dbms.test.cpp.o CMakeFiles/test_dbms.dir/home/arun/dev/IntelliFarm/src/dbms.cpp.o -o test_dbms  -lSTATIC -lmysqlcppconnx 

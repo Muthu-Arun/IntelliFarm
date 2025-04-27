@@ -1,32 +1,26 @@
 [
 {
-  "directory": "/home/arun/dev/ecs/build",
-  "command": "/usr/bin/c++  -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3 -I/home/arun/dev/ecs/vendor/mysqlx -std=gnu++17 -o CMakeFiles/server.dir/src/main.cpp.o -c /home/arun/dev/ecs/src/main.cpp",
-  "file": "/home/arun/dev/ecs/src/main.cpp",
+  "directory": "/home/arun/dev/IntelliFarm/build",
+  "command": "/usr/bin/clang++  -I/home/arun/dev/IntelliFarm/src -I/home/arun/dev/IntelliFarm/vendor/crow -I/home/arun/dev/IntelliFarm/vendor/sqlite3 -I/home/arun/dev/IntelliFarm/vendor/mysqlx -g -std=gnu++17 -o CMakeFiles/server.dir/src/main.cpp.o -c /home/arun/dev/IntelliFarm/src/main.cpp",
+  "file": "/home/arun/dev/IntelliFarm/src/main.cpp",
   "output": "CMakeFiles/server.dir/src/main.cpp.o"
 },
 {
-  "directory": "/home/arun/dev/ecs/build",
-  "command": "/usr/bin/c++  -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3 -I/home/arun/dev/ecs/vendor/mysqlx -std=gnu++17 -o CMakeFiles/server.dir/src/dbms.cpp.o -c /home/arun/dev/ecs/src/dbms.cpp",
-  "file": "/home/arun/dev/ecs/src/dbms.cpp",
+  "directory": "/home/arun/dev/IntelliFarm/build",
+  "command": "/usr/bin/clang++  -I/home/arun/dev/IntelliFarm/src -I/home/arun/dev/IntelliFarm/vendor/crow -I/home/arun/dev/IntelliFarm/vendor/sqlite3 -I/home/arun/dev/IntelliFarm/vendor/mysqlx -g -std=gnu++17 -o CMakeFiles/server.dir/src/dbms.cpp.o -c /home/arun/dev/IntelliFarm/src/dbms.cpp",
+  "file": "/home/arun/dev/IntelliFarm/src/dbms.cpp",
   "output": "CMakeFiles/server.dir/src/dbms.cpp.o"
 },
 {
-  "directory": "/home/arun/dev/ecs/build",
-  "command": "/usr/bin/c++  -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3 -I/home/arun/dev/ecs/vendor/mysqlx -std=gnu++17 -o CMakeFiles/server.dir/src/rab.cpp.o -c /home/arun/dev/ecs/src/rab.cpp",
-  "file": "/home/arun/dev/ecs/src/rab.cpp",
-  "output": "CMakeFiles/server.dir/src/rab.cpp.o"
+  "directory": "/home/arun/dev/IntelliFarm/build",
+  "command": "/usr/bin/clang++  -I/home/arun/dev/IntelliFarm/src -I/home/arun/dev/IntelliFarm/vendor/crow -I/home/arun/dev/IntelliFarm/vendor/sqlite3 -I/home/arun/dev/IntelliFarm/vendor/mysqlx -g -std=gnu++17 -o CMakeFiles/server.dir/src/rab/rab.cpp.o -c /home/arun/dev/IntelliFarm/src/rab/rab.cpp",
+  "file": "/home/arun/dev/IntelliFarm/src/rab/rab.cpp",
+  "output": "CMakeFiles/server.dir/src/rab/rab.cpp.o"
 },
 {
-  "directory": "/home/arun/dev/ecs/build",
-  "command": "/usr/bin/cc  -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3 -I/home/arun/dev/ecs/vendor/mysqlx  -o CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o -c /home/arun/dev/ecs/vendor/sqlite3/sqlite3.c",
-  "file": "/home/arun/dev/ecs/vendor/sqlite3/sqlite3.c",
-  "output": "CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o"
-},
-{
-  "directory": "/home/arun/dev/ecs/build",
-  "command": "/usr/bin/c++  -I/home/arun/dev/ecs/src -I/home/arun/dev/ecs/vendor/crow -I/home/arun/dev/ecs/vendor/sqlite3 -I/home/arun/dev/ecs/vendor/mysqlx -std=gnu++17 -o CMakeFiles/server.dir/src/run.cpp.o -c /home/arun/dev/ecs/src/run.cpp",
-  "file": "/home/arun/dev/ecs/src/run.cpp",
+  "directory": "/home/arun/dev/IntelliFarm/build",
+  "command": "/usr/bin/clang++  -I/home/arun/dev/IntelliFarm/src -I/home/arun/dev/IntelliFarm/vendor/crow -I/home/arun/dev/IntelliFarm/vendor/sqlite3 -I/home/arun/dev/IntelliFarm/vendor/mysqlx -g -std=gnu++17 -o CMakeFiles/server.dir/src/run.cpp.o -c /home/arun/dev/IntelliFarm/src/run.cpp",
+  "file": "/home/arun/dev/IntelliFarm/src/run.cpp",
   "output": "CMakeFiles/server.dir/src/run.cpp.o"
 }
 ]

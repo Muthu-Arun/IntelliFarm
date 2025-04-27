@@ -19,8 +19,7 @@ include_directories(
 add_executable(${PROJECT_NAME}
     ./src/main.cpp
     ./src/dbms.cpp
-    ./src/rab.cpp
-    ./vendor/sqlite3/sqlite3.c
+    ./src/rab/rab.cpp
     ./src/run.cpp
 )
 
