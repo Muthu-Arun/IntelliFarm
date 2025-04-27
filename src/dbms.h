@@ -59,6 +59,7 @@ struct actuator{
 
 namespace db{
 
+
     inline std::unique_ptr<mysqlx::Session> session;
     inline std::unique_ptr<mysqlx::Schema> schema;
     
