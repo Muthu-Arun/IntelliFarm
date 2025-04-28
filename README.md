@@ -1,4 +1,4 @@
-A Monolithic IOT backend writtten in C++ using the Crow Framework. (The code is being refactored)
+A Monolithic IOT backend writtten in C++ using the Crow Framework. (The code is being refactored, refer dev branch to see progress)
 
 Backend Framework - Crow
 
