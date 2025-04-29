@@ -12,7 +12,7 @@ namespace compute {
     template<typename t>
     void add_tensor(t* t1, t* t2,const std::vector<size_t>& dims){
         for (size_t sze : dims) {
-        
+            
         }
     }
     template <typename t>
