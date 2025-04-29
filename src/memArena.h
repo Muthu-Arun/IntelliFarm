@@ -1,11 +1,12 @@
+#pragma once
 #include <cstddef>
 #include<stdlib.h>
-#include<unordered_map>
+#include<map>
 #include <iostream>
 namespace memArena{
 extern std::byte* rootptr ;
 extern size_t avail_space;
-extern std::unordered_map<size_t,size_t> memspace;
+extern std::map<size_t,size_t> memspace;
 void init(size_t);
 void print_memory_pool_details();
 size_t search_free_spot(size_t block_size = 1);

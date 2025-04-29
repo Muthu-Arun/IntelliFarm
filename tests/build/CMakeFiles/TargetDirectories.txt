@@ -1,0 +1,3 @@
+/home/arun/dev/IntelliFarm/tests/build/CMakeFiles/test_dbms.dir
+/home/arun/dev/IntelliFarm/tests/build/CMakeFiles/edit_cache.dir
+/home/arun/dev/IntelliFarm/tests/build/CMakeFiles/rebuild_cache.dir

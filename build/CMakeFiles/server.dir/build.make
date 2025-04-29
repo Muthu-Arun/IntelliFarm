@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/arun/dev/ecs
+CMAKE_SOURCE_DIR = /home/arun/dev/IntelliFarm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/arun/dev/ecs/build
+CMAKE_BINARY_DIR = /home/arun/dev/IntelliFarm/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/server.dir/depend.make
@@ -70,81 +70,66 @@ include CMakeFiles/server.dir/progress.make
 include CMakeFiles/server.dir/flags.make
 
 CMakeFiles/server.dir/src/main.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/main.cpp.o: /home/arun/dev/ecs/src/main.cpp
+CMakeFiles/server.dir/src/main.cpp.o: /home/arun/dev/IntelliFarm/src/main.cpp
 CMakeFiles/server.dir/src/main.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/ecs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/main.cpp.o -MF CMakeFiles/server.dir/src/main.cpp.o.d -o CMakeFiles/server.dir/src/main.cpp.o -c /home/arun/dev/ecs/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/IntelliFarm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/main.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/main.cpp.o -MF CMakeFiles/server.dir/src/main.cpp.o.d -o CMakeFiles/server.dir/src/main.cpp.o -c /home/arun/dev/IntelliFarm/src/main.cpp
 
 CMakeFiles/server.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/ecs/src/main.cpp > CMakeFiles/server.dir/src/main.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/IntelliFarm/src/main.cpp > CMakeFiles/server.dir/src/main.cpp.i
 
 CMakeFiles/server.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/ecs/src/main.cpp -o CMakeFiles/server.dir/src/main.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/IntelliFarm/src/main.cpp -o CMakeFiles/server.dir/src/main.cpp.s
 
 CMakeFiles/server.dir/src/dbms.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/dbms.cpp.o: /home/arun/dev/ecs/src/dbms.cpp
+CMakeFiles/server.dir/src/dbms.cpp.o: /home/arun/dev/IntelliFarm/src/dbms.cpp
 CMakeFiles/server.dir/src/dbms.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/ecs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/src/dbms.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/dbms.cpp.o -MF CMakeFiles/server.dir/src/dbms.cpp.o.d -o CMakeFiles/server.dir/src/dbms.cpp.o -c /home/arun/dev/ecs/src/dbms.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/IntelliFarm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/src/dbms.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/dbms.cpp.o -MF CMakeFiles/server.dir/src/dbms.cpp.o.d -o CMakeFiles/server.dir/src/dbms.cpp.o -c /home/arun/dev/IntelliFarm/src/dbms.cpp
 
 CMakeFiles/server.dir/src/dbms.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/dbms.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/ecs/src/dbms.cpp > CMakeFiles/server.dir/src/dbms.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/IntelliFarm/src/dbms.cpp > CMakeFiles/server.dir/src/dbms.cpp.i
 
 CMakeFiles/server.dir/src/dbms.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/dbms.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/ecs/src/dbms.cpp -o CMakeFiles/server.dir/src/dbms.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/IntelliFarm/src/dbms.cpp -o CMakeFiles/server.dir/src/dbms.cpp.s
 
-CMakeFiles/server.dir/src/rab.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/rab.cpp.o: /home/arun/dev/ecs/src/rab.cpp
-CMakeFiles/server.dir/src/rab.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/ecs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/src/rab.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/rab.cpp.o -MF CMakeFiles/server.dir/src/rab.cpp.o.d -o CMakeFiles/server.dir/src/rab.cpp.o -c /home/arun/dev/ecs/src/rab.cpp
+CMakeFiles/server.dir/src/rab/rab.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/rab/rab.cpp.o: /home/arun/dev/IntelliFarm/src/rab/rab.cpp
+CMakeFiles/server.dir/src/rab/rab.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/IntelliFarm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/src/rab/rab.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/rab/rab.cpp.o -MF CMakeFiles/server.dir/src/rab/rab.cpp.o.d -o CMakeFiles/server.dir/src/rab/rab.cpp.o -c /home/arun/dev/IntelliFarm/src/rab/rab.cpp
 
-CMakeFiles/server.dir/src/rab.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/rab.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/ecs/src/rab.cpp > CMakeFiles/server.dir/src/rab.cpp.i
+CMakeFiles/server.dir/src/rab/rab.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/rab/rab.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/IntelliFarm/src/rab/rab.cpp > CMakeFiles/server.dir/src/rab/rab.cpp.i
 
-CMakeFiles/server.dir/src/rab.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/rab.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/ecs/src/rab.cpp -o CMakeFiles/server.dir/src/rab.cpp.s
-
-CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o: /home/arun/dev/ecs/vendor/sqlite3/sqlite3.c
-CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/ecs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o -MF CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o.d -o CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o -c /home/arun/dev/ecs/vendor/sqlite3/sqlite3.c
-
-CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/arun/dev/ecs/vendor/sqlite3/sqlite3.c > CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.i
-
-CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/arun/dev/ecs/vendor/sqlite3/sqlite3.c -o CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.s
+CMakeFiles/server.dir/src/rab/rab.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/rab/rab.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/IntelliFarm/src/rab/rab.cpp -o CMakeFiles/server.dir/src/rab/rab.cpp.s
 
 CMakeFiles/server.dir/src/run.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/run.cpp.o: /home/arun/dev/ecs/src/run.cpp
+CMakeFiles/server.dir/src/run.cpp.o: /home/arun/dev/IntelliFarm/src/run.cpp
 CMakeFiles/server.dir/src/run.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/ecs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/server.dir/src/run.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/run.cpp.o -MF CMakeFiles/server.dir/src/run.cpp.o.d -o CMakeFiles/server.dir/src/run.cpp.o -c /home/arun/dev/ecs/src/run.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arun/dev/IntelliFarm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/server.dir/src/run.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/run.cpp.o -MF CMakeFiles/server.dir/src/run.cpp.o.d -o CMakeFiles/server.dir/src/run.cpp.o -c /home/arun/dev/IntelliFarm/src/run.cpp
 
 CMakeFiles/server.dir/src/run.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/run.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/ecs/src/run.cpp > CMakeFiles/server.dir/src/run.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arun/dev/IntelliFarm/src/run.cpp > CMakeFiles/server.dir/src/run.cpp.i
 
 CMakeFiles/server.dir/src/run.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/run.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/ecs/src/run.cpp -o CMakeFiles/server.dir/src/run.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arun/dev/IntelliFarm/src/run.cpp -o CMakeFiles/server.dir/src/run.cpp.s
 
 # Object files for target server
 server_OBJECTS = \
 "CMakeFiles/server.dir/src/main.cpp.o" \
 "CMakeFiles/server.dir/src/dbms.cpp.o" \
-"CMakeFiles/server.dir/src/rab.cpp.o" \
-"CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o" \
+"CMakeFiles/server.dir/src/rab/rab.cpp.o" \
 "CMakeFiles/server.dir/src/run.cpp.o"
 
 # External object files for target server
@@ -152,12 +137,11 @@ server_EXTERNAL_OBJECTS =
 
 server: CMakeFiles/server.dir/src/main.cpp.o
 server: CMakeFiles/server.dir/src/dbms.cpp.o
-server: CMakeFiles/server.dir/src/rab.cpp.o
-server: CMakeFiles/server.dir/vendor/sqlite3/sqlite3.c.o
+server: CMakeFiles/server.dir/src/rab/rab.cpp.o
 server: CMakeFiles/server.dir/src/run.cpp.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/arun/dev/ecs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/arun/dev/IntelliFarm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -169,6 +153,6 @@ CMakeFiles/server.dir/clean:
 .PHONY : CMakeFiles/server.dir/clean
 
 CMakeFiles/server.dir/depend:
-	cd /home/arun/dev/ecs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arun/dev/ecs /home/arun/dev/ecs /home/arun/dev/ecs/build /home/arun/dev/ecs/build /home/arun/dev/ecs/build/CMakeFiles/server.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/arun/dev/IntelliFarm/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arun/dev/IntelliFarm /home/arun/dev/IntelliFarm /home/arun/dev/IntelliFarm/build /home/arun/dev/IntelliFarm/build /home/arun/dev/IntelliFarm/build/CMakeFiles/server.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/server.dir/depend
 
