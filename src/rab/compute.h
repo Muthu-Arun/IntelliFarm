@@ -1,57 +1,43 @@
 #pragma once
+#include <cassert>
+#include <cstddef>
 #include<iostream>
 #include<vector>
 #include<thread>
 #include<cmath>
 
+inline bool match_size(const std::vector<size_t>& , const std::vector<size_t>& );
+
 namespace compute {
-template <typename t>
-t sum(const std::vector<t>& data){
-    t sum = 0;
-    for(t item : data){
-        sum += item;
+    template<typename t>
+    void add_tensor(t* t1, t* t2,const std::vector<size_t>& dims){
+        for (size_t sze : dims) {
+        
+        }
     }
-    return sum;
-}
-template <typename t>
-double mean(const std::vector<t>& data){
-    return sum(data)/data.size();
+    template <typename t>
+    t sum(const std::vector<t>& data){
+        t sum = 0;
+        for(t item : data){
+            sum += item;
+        }
+        return sum;
+    }
+    template <typename t>
+    double mean(const std::vector<t>& data){
+        return sum(data)/data.size();
 
-}
-template <typename t>
-double calculate_standard_deviation(const std::vector<t>& data) {
-    double mean = mean(data);
-    double sum = 0.0;
+    }
+    template <typename t>
+    double calculate_standard_deviation(const std::vector<t>& data) {
+        double mean = mean(data);
+        double sum = 0.0;
 
-    for (t value : data) {
-        sum += (value - mean) * (value - mean);
+        for (t value : data) {
+            sum += (value - mean) * (value - mean);
+        }
+
+        return std::sqrt(sum / data.size()); 
     }
 
-    return std::sqrt(sum / data.size()); 
 }
-
-}
-template<typename t>
-class tensor{
-    private:
-        t* data = nullptr;
-        std::vector<size_t> m_dims;
-        bool memory_alloc(){
-            size_t s = 1;
-            for(size_t i : m_dims){s*= i;}
-            data = new t[s];
-            
-        }
-    public:
-        tensor() = default;
-        tensor(std::vector<size_t> dims): m_dims(dims){
-
-        }
-        ~tensor(){
-            delete [] data;
-        }
-
-
-
-
-};
